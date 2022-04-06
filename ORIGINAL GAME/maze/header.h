@@ -14,19 +14,20 @@ typedef struct
 typedef struct 
 { 
 SDL_Rect position;
-TTF_Font *font;
-SDL_Surface *surfaceTexte;
-SDL_Color textColor ;
-char texte [80];
-}texte;
+	TTF_Font *font;
+	SDL_Surface * surfaceTexte;
+	SDL_Color textColor;
+	char texte [50];
+}text;
 
 void init_enigme( enigme es[] ,enigme *back,enigme timer[] );
 void afficherEnigme(enigme e, SDL_Surface * screen);
 void animer (enigme *e);
+void generateennigmeS();
 
 //texte 
 
-void initexte(texte *t);
-void displayText(texte t,SDL_Surface *screen,char time[20]);
+void initexte(text *t);
+void displayText(text t,SDL_Surface *screen,char cc[30]);
 
 
