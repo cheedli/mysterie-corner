@@ -1,0 +1,4 @@
+Which_water_body_borders_Tunisia_to_the_north? , Mediterranean_Sea , Caribbean_Sea , Yellow_sea 1
+When_did_Tunisia_become_a_republic? , 1_January_1948. , 3_May_1952 , 25_July_1957. 3
+Where_was_the_opening_sequence_of_Star_Wars_filmed? ,Tataouine. , Matmata. , Nefta. 2
+What_type_of_Roman_building_is_found_at_El_jem? , Amphitheatre. , Fort. , Temple. 1
