@@ -29,5 +29,3 @@ void generateennigmeS();
 
 void initexte(text *t);
 void displayText(text t,SDL_Surface *screen,char cc[30]);
-
-

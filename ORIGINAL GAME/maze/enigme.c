@@ -87,7 +87,7 @@ SDL_BlitSurface (e.img,NULL,screen,&e.pos);
 void animer (enigme *e)
 {
 TTF_Init();
-//      ***************************INITIALISATION***************************
+//      **************************INITIALISATION**************************
 	SDL_Surface *screen ;
 	SDL_Event event;
 	enigme es[6] , timer[10],back;
@@ -112,7 +112,7 @@ TTF_Init();
 	
 	initexte(&tt);
 
- // **************son bref*******************
+ // *************son bref******************
 
 int v=100;
 Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
@@ -129,7 +129,7 @@ if ((true == NULL)||(false == NULL))
 
 
 	
-//      ***************************BOUCLE***************************
+//      **************************BOUCLE**************************
 	
 	while (cont)
 	{	 
@@ -269,3 +269,4 @@ void displayText(text t,SDL_Surface *screen,char cc[30])
     t.surfaceTexte = TTF_RenderText_Solid(t.font, cc, t.textColor );
     SDL_BlitSurface(t.surfaceTexte, NULL, screen,&t.position);
 }
+
