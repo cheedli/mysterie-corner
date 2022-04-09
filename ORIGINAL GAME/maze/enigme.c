@@ -112,7 +112,21 @@ TTF_Init();
 	
 	initexte(&tt);
 
- 
+ // **************son bref*******************
+
+int v=100;
+Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
+Mix_Chunk *true,*false;
+true=Mix_LoadWAV("true.Wav");
+false=Mix_LoadWAV("false.Wav");
+Mix_VolumeChunk(true,v);
+Mix_VolumeChunk(false,v);
+if ((true == NULL)||(false == NULL))
+{
+  printf("XXXXXXXXXX: %s\n", Mix_GetError());
+}
+	
+
 
 	
 //      ***************************BOUCLE***************************
