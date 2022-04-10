@@ -11,7 +11,7 @@ typedef struct
 char mazesmall[50],mazebig[50];
  SDL_Surface *maze[6],*timer[10],*back;
  SDL_Rect 	posmaze[6],postimer,posback;
- int reponsejuste;
+ int reponsejuste,reponse,r[3];
 }enigme;
 
 
@@ -19,8 +19,5 @@ char mazesmall[50],mazebig[50];
 void InitEnigme(enigme * e, char *nomfichier);
 void afficherEnigme(enigme e, SDL_Surface * screen);
 void animer (enigme *e);
-
-
-//texte 
 
 

@@ -3,7 +3,8 @@
 void InitEnigme(enigme * e, char *nomfichier)
 {
     int x;
-    int i=0 ;
+    int i=0,j=0 ;
+    
     srand(time(0));
     x=(rand() % (3)) +1;
 
@@ -15,18 +16,21 @@ void InitEnigme(enigme * e, char *nomfichier)
     {
         while(nb!=0)
         {
-            fscanf(F,"%s %s %d\n",e->mazesmall,e->mazebig,&(e->reponsejuste));
+            fscanf(F,"%s %s %d\n",e->mazesmall,e->mazebig,&(e->reponse));
 
             if(nb>3)
             {
-
                 nb--;
             }
+            
             else
+            
             {
-                printf("%s %s %d\n",e->mazesmall,e->mazebig,e->reponsejuste);
+
                 e->maze[i]=IMG_Load( e->mazesmall) ;
                 e->maze[i+1]=IMG_Load( e->mazebig) ;
+                e->r[j]= e->reponse;
+                j++;
                 i+=2;
                 nb--;
             }
@@ -73,6 +77,7 @@ void InitEnigme(enigme * e, char *nomfichier)
 
     for(i=0; i<6; i++)
     {
+    
 
         if (e->maze[i]==NULL)
         {
@@ -84,8 +89,8 @@ void InitEnigme(enigme * e, char *nomfichier)
 
 
     }
-    				e->posmaze[0].x = 170 ;
-    				e->posmaze[0].y = 350;
+    			e->posmaze[0].x = 170 ;
+    			e->posmaze[0].y = 350;
 
 
                     e->posmaze[2].x = 520 ;
@@ -121,9 +126,9 @@ void animer (enigme *e)
     SDL_Surface *screen ;
     SDL_Event event;
 
-    int  a=0,b=2,c=4;
+
     int cont = 1;
-    int o,t=0,i=0;
+    int t=0,choix=0;
     char cc[20];
     text tt;
     time_t start,end;
@@ -167,29 +172,27 @@ void animer (enigme *e)
         sprintf(cc, ":0%d", t);
         
        afficherEnigme(*e, screen);
-            SDL_BlitSurface (e->timer[t],NULL,screen,&e->postimer);
+          SDL_BlitSurface (e->timer[t],NULL,screen,&e->postimer);
         displayText(tt,screen,cc);
-        SDL_PollEvent(&event);
-
+        
         end=clock();
         t=(end-start)/CLOCKS_PER_SEC;
 
-        if(o!=t)
-            printf("%d\n",t);
+        
         if(t==10)
         {
             cont=0;
+            e->reponsejuste=0;
         }
-        o=t;
+
+SDL_PollEvent(&event);
 
         if ((event.type == SDL_QUIT)||(event.key.keysym.sym == SDLK_ESCAPE))
             cont = 0;
         SDL_Flip(screen);
-        a=0;
-        b=2;
-        c=4;
+        
 
-
+choix=0;
         switch(event.type)
         {
 
@@ -201,54 +204,20 @@ void animer (enigme *e)
 
 
             case SDLK_a:
-                if(a!=0)
-                    a=0;
-                else
-                {
-                    a=1;
-
-
-
-                }
+                choix=1;
                 break;
             case SDLK_q:
-                if(a!=0)
-                    a=0;
-                else
-                {
-                    a=1;
-
-
-                }
+                choix=1;
                 break;
             case SDLK_b:
-                if(b!=2)
-                    b=2;
-                else
-
-                {
-
-                    b=3;
-
-
-                }
+                choix=2;
                 break;
             case SDLK_c:
-                if(c!=4)
-                    c=4;
-                else
-
-
-                {
-
-                    c=5;
-
-                }
+                                choix=3;
                 break;
-
-
-
-
+                case SDLK_SPACE:
+                        cont=0;
+                break;
             }
             break;
         case SDL_MOUSEMOTION:
@@ -257,25 +226,30 @@ void animer (enigme *e)
 
             if (event.motion.x>170&& event.motion.y>350 && event.motion.x<380&& event.motion.y<600)
 
-                a=1;
+                choix=1;
 
             if (event.motion.x>520&& event.motion.y>350 && event.motion.x<710&& event.motion.y<600)
 
-                b=3;
+                choix=2;
 
             if (event.motion.x>880&& event.motion.y>350 && event.motion.x<1090&& event.motion.y<600)
 
-                c=5;
+                choix=3;
 
             break;
+            case SDL_MOUSEBUTTONDOWN://idha nzelt 3al l boutons heka o nty deja fyl perimetre t3 botton bch ytnzel alih o  yaatik resultat
+             
+            if (event.button.button==SDL_BUTTON_LEFT)
+            {
 
-
+                
+		cont=0;
+                }
         }
+        e->reponsejuste=e->r[choix-1];
 
 
-    }
-
-}
+}}
 
 void initexte(text *A)
 {
