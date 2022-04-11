@@ -1,5 +1,5 @@
-ms/m2.png mb/m2.png 0
-ms/m3.png mb/m3.png 0
-ms/m1.png mb/m1.png 1
-ms/m4.png mb/m4.png 0
-ms/m5.png mb/m5.png 0
+ms/m2.png  0
+ms/m3.png  0
+ms/m1.png  1
+ms/m4.png  0
+ms/m5.png  0

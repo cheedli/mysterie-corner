@@ -15,8 +15,26 @@ pos.x=0;
 pos.y=0;
 enigme e;
 animer (&e);
+ // ************son bref*****************
+
+    int v=100;
+    Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
+    Mix_Chunk *music[2];
+    music[1]=Mix_LoadWAV("true.wav");
+    music [0]=Mix_LoadWAV("false.wav");
+    Mix_VolumeChunk(music[1],v);
+    Mix_VolumeChunk( music [0],v);
+    if ((music[1] == NULL)||( music [0] == NULL))
+    {
+        printf("XXXXXXXXXX: %s\n", Mix_GetError());
+    }
+
+
+
 while(done)
 {
+Mix_PlayChannel(-1, music[e.reponsejuste], 0);
+
     SDL_BlitSurface(resultat[e.reponsejuste],NULL,screen,&pos);
     SDL_PollEvent(&event);
 
@@ -27,6 +45,6 @@ while(done)
     
     }
 
-	SDL_Quit();
-}
+
+	SDL_Quit();}
 

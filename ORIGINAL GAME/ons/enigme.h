@@ -21,9 +21,8 @@ typedef struct
            SDL_Rect posRepones[3];
 
  			int choix_question;
-       		int reponsejuste;
-       		
-             	   char question[200];  
+       int reponsejuste;
+           char question[200];  
            char r1[30];
            char r2[30];
            char r3[30];  
@@ -38,6 +37,8 @@ typedef struct
 
 void initImages(image boutoun[],image repp[]);
 void afficherbutton(image a, SDL_Surface *screen);
+void inithorloge(SDL_Surface *horloge[]);
+
 void InitEnigme(enigme *e,char *nomfichier);
 void afficherEnigme(enigme *e,SDL_Surface *screen);
 void animer (enigme *e);

@@ -16,7 +16,7 @@ void InitEnigme(enigme * e, char *nomfichier)
     {
         while(nb!=0)
         {
-            fscanf(F,"%s %s %d\n",e->mazesmall,e->mazebig,&(e->reponse));
+            fscanf(F,"%s %d\n",e->mazesmall,&(e->reponse));
 
             if(nb>3)
             {
@@ -28,10 +28,10 @@ void InitEnigme(enigme * e, char *nomfichier)
             {
 
                 e->maze[i]=IMG_Load( e->mazesmall) ;
-                e->maze[i+1]=IMG_Load( e->mazebig) ;
+printf("%d",e->reponse);
                 e->r[j]= e->reponse;
                 j++;
-                i+=2;
+                i++;
                 nb--;
             }
         }
@@ -75,7 +75,7 @@ void InitEnigme(enigme * e, char *nomfichier)
 
 
 
-    for(i=0; i<6; i++)
+    for(i=0; i<3; i++)
     {
     
 
@@ -93,20 +93,13 @@ void InitEnigme(enigme * e, char *nomfichier)
     			e->posmaze[0].y = 350;
 
 
-                    e->posmaze[2].x = 520 ;
+                    e->posmaze[1].x = 520 ;
+                    e->posmaze[1].y = 350;
+
+                    e->posmaze[2].x = 910 ;
                     e->posmaze[2].y = 350;
 
-                    e->posmaze[4].x = 910 ;
-                    e->posmaze[4].y = 350;
-
-                    e->posmaze[1].x = 150 ;
-                    e->posmaze[1].y = 300;
-
-                    e->posmaze[3].x = 500;
-                    e->posmaze[3].y = 300;
-
-                    e->posmaze[5].x = 880 ;
-                    e->posmaze[5].y = 300;
+                   
 
      }
 
@@ -114,15 +107,15 @@ void InitEnigme(enigme * e, char *nomfichier)
 {
     SDL_BlitSurface (e.back,NULL,screen,&e.posback);
     SDL_BlitSurface (e.maze[0],NULL,screen,&e.posmaze[0]);
+    SDL_BlitSurface (e.maze[1],NULL,screen,&e.posmaze[1]);
     SDL_BlitSurface (e.maze[2],NULL,screen,&e.posmaze[2]);
-    SDL_BlitSurface (e.maze[4],NULL,screen,&e.posmaze[4]);
 
 }
 
 void animer (enigme *e)
 {
     TTF_Init();
-//      **************************INITIALISATION**************************
+//      *************************INITIALISATION*************************
     SDL_Surface *screen ;
     SDL_Event event;
 
@@ -147,24 +140,11 @@ void animer (enigme *e)
 
     initexte(&tt);
 
-// *************son bref******************
-
-    int v=100;
-    Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
-    Mix_Chunk *true,*false;
-    true=Mix_LoadWAV("true.wav");
-    false=Mix_LoadWAV("false.wav");
-    Mix_VolumeChunk(true,v);
-    Mix_VolumeChunk(false,v);
-    if ((true == NULL)||(false == NULL))
-    {
-        printf("XXXXXXXXXX: %s\n", Mix_GetError());
-    }
 
 
 
 
-//      **************************BOUCLE**************************
+//      *************************BOUCLE*************************
 
     while (cont)
     {
@@ -178,7 +158,6 @@ void animer (enigme *e)
         end=clock();
         t=(end-start)/CLOCKS_PER_SEC;
 
-        
         if(t==10)
         {
             cont=0;
@@ -192,12 +171,11 @@ SDL_PollEvent(&event);
         SDL_Flip(screen);
         
 
-choix=0;
+
         switch(event.type)
         {
 
         case SDL_KEYDOWN:
-            SDL_Delay(120);
 
             switch(event.key.keysym.sym)
             {
@@ -241,15 +219,13 @@ choix=0;
              
             if (event.button.button==SDL_BUTTON_LEFT)
             {
-
-                
 		cont=0;
                 }
         }
+}
+printf("\n%d\n",e->r[choix-1]);
         e->reponsejuste=e->r[choix-1];
-
-
-}}
+        }
 
 void initexte(text *A)
 {
@@ -269,4 +245,3 @@ void displayText(text t,SDL_Surface *screen,char cc[30])
     t.surfaceTexte = TTF_RenderText_Solid(t.font, cc, t.textColor );
     SDL_BlitSurface(t.surfaceTexte, NULL, screen,&t.position);
 }
-
