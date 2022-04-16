@@ -1,9 +1,8 @@
 #include "enigme.h"
-//fonction taamlk initialisation lil tableau t3 les botouns o tsawer win or lose
 void initImages(image boutoun[],image winorlose[])
 {
  int i;
- //tableau ta3 repp fyh zouz tsawer taswira win o taswira lose
+
 winorlose[0].img=IMG_Load("w.png");
 winorlose[1].img=IMG_Load("l.png");
 
@@ -14,7 +13,7 @@ winorlose[1].pos.y=0;
     
 
 for(i=0;i<3;i++)
-//tableau fyh l kol nafs e tasswira fyh l bouton e saghroun ly fyh les reponses
+
     boutoun[i].img=IMG_Load("b.png");
 
 
@@ -33,35 +32,35 @@ for(i=0;i<3;i++)
 void InitEnigme(enigme *e, char *nomfichier)
 
 {
-	int numerodequestion=0;//nomrou l question or d'autre façon anahuwa star ly bch yekhdh menou kol chy
+	int numerodequestion=0;
 
-    srand(time(0));//tb3a random chaalik feha
-    e->choix_question=(rand() % (4)) +1;//bch taatik 3dad aleatoire mabyn 1 et 4
+    srand(time(0));
+    e->choix_question=(rand() % (4)) +1;
 
     SDL_Color couleurNoire= {0,0,0};
     TTF_Font *police;
 
-    police = TTF_OpenFont("f.otf", 30);//ism l police ily bch testaamlha o taille
+    police = TTF_OpenFont("f.otf", 30);
 
     FILE *F;
     
-    F=fopen(nomfichier, "r");//7alina fichier en mode read
+    F=fopen(nomfichier, "r");
     
-    if(F!=NULL)//idha l fichier mawjoud
+    if(F!=NULL)
 	    {
-		while((fscanf(F,"%s , %s , %s , %s  %d\n",e->question,e->r1,e->r2,e->r3,&(e->reponsejuste))!=EOF)&&( numerodequestion!=e->choix_question))//fscanf bch tkhazen  les variables  o nombre de question yaani bch youssl lil sstar ly hchtou bih
+		while((fscanf(F,"%s , %s , %s , %s  %d\n",e->question,e->r1,e->r2,e->r3,&(e->reponsejuste))!=EOF)&&( numerodequestion!=e->choix_question)) 
 		{
 		    numerodequestion++;;
 		}
 	    }
     else 
 	    printf("erreur lors de l'execution du fichier\n");
-	    fclose(F);//sakrna l fichier
+	    fclose(F);
 
 
 	printf("%s \n %d \n",e->question,e->reponsejuste);
 
-    e->quest= TTF_RenderText_Solid (police,e->question,couleurNoire);//n7adher fy surface t3 text lil question o les reponse yaani kol wahda andha police mt3ha o chnuwa chaine de caharactere ly bch tkoun feha o l couleur mt3ha
+    e->quest= TTF_RenderText_Solid (police,e->question,couleurNoire);
     e->posQuestion.x=300;
     e->posQuestion.y=250;
 
@@ -83,7 +82,7 @@ void InitEnigme(enigme *e, char *nomfichier)
 
 void afficherEnigme(enigme *e, SDL_Surface *screen)
 
-{//affichage mt3 question o les 3 reponses
+{
 
     SDL_BlitSurface(e->quest,NULL,screen,&(e->posQuestion));
     SDL_BlitSurface(e->reponses[0],NULL,screen,&(e->posRepones[0]));
@@ -94,7 +93,7 @@ void afficherEnigme(enigme *e, SDL_Surface *screen)
 
 void afficherbutton(image a, SDL_Surface *screen)
 			
-{//affichage t3 l bouton
+{
     SDL_BlitSurface(a.img,NULL,screen,&a.pos);
 }
 
@@ -104,8 +103,8 @@ SDL_Surface *horloge[10];
 SDL_Rect p;
 
     time_t debut,fin;
-    TTF_Init();//initialisation t3 text
-    SDL_Init(SDL_INIT_VIDEO);//initialisition t3 l ecran
+    TTF_Init();
+    SDL_Init(SDL_INIT_VIDEO);
     debut=clock();
     SDL_Surface *screen;
     SDL_Surface *back=NULL,*b;
@@ -114,17 +113,17 @@ SDL_Rect p;
 
  
 
-    int done=1,done1=1,rep=0,temps=0;//done heya m loul blkol o done1 heya ky tkhtar wahda shyha o r heya reponse ly bch ykhtarha utilisateur
+    int done=1,done1=1,rep=0,temps=0;
 
 
     SDL_Event event;
 
-    screen=SDL_SetVideoMode(1380,700,32,SDL_HWSURFACE  );//initialisation t3 screen
+    screen=SDL_SetVideoMode(1380,700,32,SDL_HWSURFACE  );
     if(!screen)
     {
         printf("Unable de set 600x300 video: %s\n", SDL_GetError());
     }
-    back= IMG_Load("bac.png");//initialisation t3 background
+    back= IMG_Load("bac.png");
     pos.x=0;
     pos.y=0;
     
@@ -132,50 +131,50 @@ SDL_Rect p;
 p.y=320;
     
 
-b=IMG_Load("b1.png");//initialisation t3 l boutons fbly t3awdet khaleha haka
+b=IMG_Load("b1.png");
 
 bpos.x=200;
-bpos.y=400;
+bpos.y=400;  
 
 
 
-    image boutoun[3],winorlose[2];//declaration t3 bouton ly huma 3 kaabet o tableau winorlose
+    image boutoun[3],winorlose[2];
    inithorloge(horloge);
-   initImages(boutoun,winorlose);//initialisation t3 les tableau
+   initImages(boutoun,winorlose);
     InitEnigme(e,"enigme.txt");
-    while(done1)//done1 yaani baad matjewb bch y93d ywarik fy tasswirt win wala lose lin tnzel 3al echarp o yufa l prog
+    while(done1)
     {
-    while(done)//done yaani madmk mazlt majwbtch l taw bch yb9a ywari fik fyl les reponse lin tjwb
+    while(done)
     {
     fin=clock();
         temps=(fin-debut)/CLOCKS_PER_SEC;
         if(temps==9)
         done=0;
 
-        SDL_BlitSurface(back,NULL,screen,&pos);//affichage du background
+        SDL_BlitSurface(back,NULL,screen,&pos);
          SDL_BlitSurface(horloge[temps],NULL,screen,&p);
 
         afficherbutton(boutoun[0], screen);
         afficherbutton(boutoun[1], screen);
         afficherbutton(boutoun[2], screen);
-       afficherEnigme(e,screen);//affichage t3 question o les reponses
-        SDL_Flip(screen);//refrichessement d'ecran
+       afficherEnigme(e,screen);
+        SDL_Flip(screen);
 
-        SDL_PollEvent(&event);//bch y93d ydour may9fch l prog
+        SDL_PollEvent(&event);
 
 
-        switch(event.type)//selon l event ly bch yssir
+        switch(event.type)
         {
-        case SDL_QUIT://idha nty sakrt l prog mn l kaaboura l hamra ytsaker
+        case SDL_QUIT:
         {
-            done=0;//condition d'arret du prog
+            done=0;
         }
         break;
 
 
 
 
-        case SDL_KEYDOWN://idha massyt heja bl clavier
+        case SDL_KEYDOWN:
         {
 
             if(event.key.keysym.sym == SDLK_ESCAPE)
@@ -189,9 +188,9 @@ bpos.y=400;
             
             case SDLK_a:
                                
-                rep=1;//bch y9aydlk anahya reponse ly bch tkhtarha o baadika y9aren b reponse shyha
+                rep=1;
                 break;
-            case SDLK_q://7atina q khtr fama des clavier l boton a o l boton q ma9loubin
+            case SDLK_q:
                 rep=1;
                 break;
             case SDLK_b:
@@ -200,7 +199,7 @@ bpos.y=400;
             case SDLK_c:
                 rep=3;
                 break;
-                 case SDLK_SPACE://SDL may9rch l boton t3 l entree donc idha khtrt wehd ml les reponses o nzlt espace bch y9olk rbe7t wala khsart
+                 case SDLK_SPACE:
 
                         done=0;
                 break;
@@ -212,11 +211,11 @@ bpos.y=400;
             }
         }
         break;
-        case SDL_MOUSEMOTION: //le cas  ou 9a3da testaaml  fyl souris
+        case SDL_MOUSEMOTION: 
             	
 rep=0;
 
-            if (event.motion.x>220 && event.motion.y>400 && event.motion.x<520 && event.motion.y<550 )//hedhy yaani idha huwa fyl perimetre t3 l boton heka o same for the others
+            if (event.motion.x>220 && event.motion.y>400 && event.motion.x<520 && event.motion.y<550 )
             {
                             rep=1;
 
@@ -232,7 +231,7 @@ rep=0;
 
             }
             
-             case SDL_MOUSEBUTTONDOWN://idha nzelt 3al l boutons heka o nty deja fyl perimetre t3 botton bch ytnzel alih o  yaatik resultat
+             case SDL_MOUSEBUTTONDOWN:
              
             if (event.button.button==SDL_BUTTON_LEFT)
             {
@@ -244,11 +243,11 @@ rep=0;
     }
 
             SDL_PollEvent(&event);
-    if(event.key.keysym.sym == SDLK_ESCAPE)//idha nzelt 3al echarpe prog yufa
+    if(event.key.keysym.sym == SDLK_ESCAPE)
             {
                 done1= 0;
             }
-if(rep==e->reponsejuste){//idha khtrt shyha bch tjik you win o same lily ta7tha bch tjik you lose
+if(rep==e->reponsejuste){
        afficherbutton(winorlose[0], screen);
       }
 else {
