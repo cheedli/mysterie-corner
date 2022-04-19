@@ -1,3 +1,4 @@
+
 #include "minimap.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,12 +58,13 @@ SDL_Color couleurn= {0, 0, 0};//noir
         t->texte = TTF_RenderUTF8_Solid(t->police, t->entree, couleurn);
       
 
-SDL_BlitSurface(t->texte, NULL, ecran, &(t->position)); /* Blit du texte */
+S	DL_BlitSurface(t->texte, NULL, ecran, &(t->position)); /* Blit du texte */
 	
 }
 
 void free_temps(temps *t,SDL_Surface *ecran)
-{SDL_FreeSurface(t->texte);
+{
+SDL_FreeSurface(t->texte);
  TTF_CloseFont(t->police);
 }
 void save (int valeur_score)
