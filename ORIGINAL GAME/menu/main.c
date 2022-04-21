@@ -125,12 +125,7 @@ if(oo==12)
                 q=1;
 				c++;
 				
-				
-			if (yes==1)
-			{	
-			done=0;
-			else
-				
+			
 				
 				
 				
@@ -171,7 +166,21 @@ if(oo==12)
                 else if (q==1)
                 {
                 q=2;
-		done=0;
+                	
+			if (yes==1)
+			{	
+			done=0;
+			}
+			else
+			q=0;
+			
+			
+			if 
+			   
+			
+			
+				
+
                 }
             }
             break;
