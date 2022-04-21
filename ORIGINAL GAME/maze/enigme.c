@@ -1,3 +1,4 @@
+
 #include "header.h"
 #include "text.h"
 void InitEnigme(enigme * e, char *nomfichier)
