@@ -6,8 +6,8 @@ TTF_Init();
 
 	//declaration des variables
 
-    int done=1,odone=0,o=0,p=0,q=0,i=0,oo=0,s=4,ss,c=0;
-    image back[16],pl[3],op[3],qu[3],l[5],ll[5],name, m,backo;
+    int done=1,odone=0,o=0,p=0,q=0,i=0,oo=0,s=4,ss,c=0, sso=0,ssc=0,mmu=0;
+    image back[16],pl[3],op[3],qu[3],l[5],ll[5],so[2],sc[2],mu[2],name, m,backo;
     text t;
     SDL_Surface *screen;
     SDL_Event event;
@@ -22,7 +22,7 @@ TTF_Init();
 	//initialisation des buttons : play,option,quit et du background
 
      inti_in_option(l, ll,&backo);
-     init( qu, pl,op,back,&name);
+     init( qu, pl,op,back,so,mu,sc,&name);
 		inp( &m);
      initText(&t);
 
@@ -60,7 +60,8 @@ TTF_Init();
 	afficher(pl[p],screen);
  	afficher(op[o],screen);
  	afficher(qu[q],screen);
- 	afficher(name,screen);
+ 	afficher(name,screen);   
+        afficher (sc[ssc],screen);
 	displayText(t,screen);
 
 	}
@@ -98,10 +99,16 @@ if(oo==12)
 		p=0;
 		q=0;
 		o=0;
+               ssc=0;
 
-            if (event.motion.x>275 && event.motion.y>350 && event.motion.x<520 && event.motion.y<450 )
+            if (event.motion.x>275 && event.motion.y>250 && event.motion.x<520 && event.motion.y<350 )
             {
                 p=1;
+		c++;
+            }
+            else if (event.motion.x>275 && event.motion.y>370 && event.motion.x<520 && event.motion.y<478 )
+            {
+                ssc=1;
 		c++;
             }
 
@@ -111,10 +118,28 @@ if(oo==12)
 		c++;
             }
 
+            
+
             else if (event.motion.x>275 && event.motion.y>600 && event.motion.x<520 && event.motion.y<700 )
             {
                 q=1;
 				c++;
+				
+				
+			if (yes==1)
+			{	
+			done=0;
+			else
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
             }
 	else
@@ -161,24 +186,33 @@ if(oo==12)
 		p=0;
 		q=0;
 		o=0;
+ssc=0;
+
 	case SDLK_RIGHT:
 
 	if ((odone==1)&&(s!=4))
 		{
 
 		s++;
-		}
 		SDL_Delay(100);
+		}
+
 
 		break;
+    case SDLK_s:
+ssc=1;
+break;
+
+
 	   case SDLK_LEFT:
 
 		if ((odone==1)&&(s!=0))
 		{
 
 		s--;
-		}
 		SDL_Delay(100);	
+		}
+
 
 		break;
             case SDLK_UP:
@@ -207,7 +241,7 @@ if(oo==12)
                     p=1;
 		} 
 
-		SDL_Delay(100);
+
 
 		
 		break ;
@@ -225,6 +259,7 @@ if(oo==12)
                     p=0;
                     o=0;
                     q=1;
+SDL_Quit();
 
                 }
                 else if (q==1 )
@@ -239,15 +274,17 @@ if(oo==12)
                     q=1;
                 }
 
-		SDL_Delay(100);
+
 
                 break;
             case SDLK_p:
+                ssc=0;
                 o=0;
                 q=0;
                 p=1;
                 break;
             case SDLK_q:
+               ssc=0;
                 o=0;
                 q=1;
                 p=0;
@@ -255,6 +292,7 @@ if(oo==12)
                 break;
 		
             case SDLK_o:
+                ssc=0;
                 p=0;
                 o=1;
                 q=0;
@@ -294,6 +332,7 @@ case SDLK_m:
                 {
                     q=2;
 		    done=0;
+SDL_Quit();
                 }
 	break;
             }
@@ -301,16 +340,17 @@ case SDLK_m:
 
 	
 	case SDL_QUIT:
-
+SDL_Quit();
 		return(0);
+
                  break;
         }
 
 	
 		
     }
+printf("e");
 TTF_Quit();
 SDL_Quit();
 return 0 ;
 }
-
