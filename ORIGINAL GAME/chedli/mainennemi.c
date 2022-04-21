@@ -1,3 +1,12 @@
+/** 
+* @file mainennemi.c 
+* @brief Testing Program. 
+* @author CHEDHLY 
+* @version 0.1 
+* @date Apr 18 , 2022
+* 
+* Testing program for EVERYTHING * 
+*/
 #include "ennemi.h"
 
 void main()
@@ -41,7 +50,7 @@ void main()
         {
         case 0:
             colision.pos.x += 5;
-            if (collisionBox( e.pos[e.level],colision.pos)==1)
+            if (collisionBox( e.pos[e.level],colision.pos))
 
                 e.etat=1;
 
@@ -74,7 +83,7 @@ void main()
         SDL_BlitSurface(colision.img,NULL,screen,&colision.pos);
         afficherEnnemi(e,screen);
         animerEnnemi(&e);
-        deplacer(&e);
+        deplacerIA(&e);
         SDL_Flip(screen);
 
         if ((event.type == SDL_QUIT)||(event.key.keysym.sym == SDLK_ESCAPE))

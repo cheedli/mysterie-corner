@@ -1,4 +1,22 @@
+
+/** 
+* @file ennemi.c 
+* @brief Testing Program. 
+* @author C Team 
+* @version 0.1 
+* @date Apr 01, 2015 
+* 
+* Testing program for colision * 
+*/
+
+
 #include "ennemi.h"
+
+/** 
+* @brief To initialize ENNEMI . 
+* @param e is the ennemi
+* @return Nothing 
+*/ 
 
 
 void initEnnemi(Ennemi *e)
@@ -58,32 +76,32 @@ void initEnnemi(Ennemi *e)
 
         //l is boulaaba
 
-        l[0].img =IMG_Load("graphic/menu/.png");//runing to the player
+        e->en.l[0] =IMG_Load("graphic/menu/.png");//runing to the player
 
-        l[0].pos2.h=l[0].img->h;
-        l[0].pos2.w=l[0].img->w/3;
+        e->en.posl[0].h=e->en.l[0]->h;
+        e->en.posl[0].w=e->en.l[0]->w/3;
 
-        l[1].img =IMG_Load("graphic/menu/.png");//attacking
+        e->en.l[1]=IMG_Load("graphic/menu/.png");//attacking
 
-        l[1].pos2.h=l[1].img->h;
-        l[1].pos2.w=l[1].img->w/3;
+        e->en.posl[1].h=e->enl[1]->h;
+        e->en.posl[1].w=e->enl[1]>w/3;
 
         //c is bouchkara
 
-        c[0].img =IMG_Load("graphic/menu/.png");//coming to the player
+        e->en.c[0] =IMG_Load("graphic/menu/.png");//coming to the player
 
-        c[0].pos2.h=c[0].img->h;
-        c[0].pos2.w=c[0].img->w/3;
+        e->en.posc[0].h=e->en.c[0]->h;
+        e->en.posc[0].w=e->en.c[0]->w/3;
 
-        c[1].img =IMG_Load("graphic/menu/.png");//attacking
+        e->en.posc[1] =IMG_Load("graphic/menu/.png");//attacking
 
-        c[1].pos2.h=c[1].img->h;
-        c[1].pos2.w=c[1].img->w/3;
+        e->en.posc[1].h=e->en.c[1]->h;
+        e->en.posc[1].w=e->en.c[1]->w/3;
 
-        c[2].img =IMG_Load("graphic/menu/.png");//dead
+        e->en.posc[2] =IMG_Load("graphic/menu/.png");//dead
 
-        c[2].pos2.h=c[2].img->h;
-        c[2].pos2.w=c[2].img->w/3;
+        e->en.posc[2].h=e->en.c[2]->h;
+        e->en.posc[2].w=e->en. c[2]->w/3;
         */
     for(i=0; i<3; i++)
 
@@ -106,6 +124,13 @@ void initEnnemi(Ennemi *e)
 
 }
 
+/** 
+* @brief To show ENNEMI . 
+* @param e is the ennemi
+* @param screen is the screen
+* @return Nothing 
+*/ 
+
 void afficherEnnemi(Ennemi e, SDL_Surface * screen)
 
 {
@@ -127,6 +152,13 @@ void afficherEnnemi(Ennemi e, SDL_Surface * screen)
     }
 
 }
+
+/** 
+* @brief To animate ENNEMI . 
+* @param e is the ennemi
+* @param screen is the screen
+* @return Nothing 
+*/ 
 
 void animerEnnemi( Ennemi * e)
 
@@ -172,8 +204,12 @@ void animerEnnemi( Ennemi * e)
         break;
     }
 }
-
-void deplacer(Ennemi *e)
+/** 
+* @brief To deplace ENNEMI . 
+* @param e is the ennemi
+* @return nothing
+*/ 
+void deplacerIA(Ennemi *e)
 {
     switch(e->level)
     {
@@ -201,9 +237,16 @@ void deplacer(Ennemi *e)
     }
 }
 
+/** 
+* @brief To show ENNEMI . 
+* @param a is the ennemi
+* @param b is the player
+* @return if there is a colision or not
+*/ 
+
 int collisionBox(SDL_Rect a, SDL_Rect b)
 {
-    if(a.x+a.h<b.x || a.x>b.x+b.w ||a .y+a.h<b.y || a.y>b.y+b.h)
+    if(a.x+a.w<b.x || a.x>b.x+b.w ||a .y+a.h<b.y || a.y>b.y+b.h)
         return 0;
     else
         return 1;
