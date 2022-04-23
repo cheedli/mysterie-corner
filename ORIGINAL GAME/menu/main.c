@@ -6,8 +6,8 @@ int main(int argc, char** argv)
 
     //declaration des variables
 
-    int done=1,odone=0,o=0,p=0,q=0,i=0,oo=0,s=4,ss,c=0, sso=0,ssc=0,mmu=0,y=0,n=0,qdone=0;
-    image back[16],pl[3],op[3],qu[3],l[5],ll[5],so[2],sc[2],mu[2],name,yes[2],no[2],yesornooption,m,backo;
+    int done=1,odone=0,o=0,p=0,q=0,i=0,oo=0,s=4,ss,c=0, sso=0,ssc=0,mmu=0,y=0,n=0,qdone=0,pdone=0,sdone=0,new=0,load=0;
+    image back[16],pl[3],op[3],qu[3],l[5],ll[5],so[2],sc[2],mu[2],name,yes[2],no[2],yesornooption,m,backo,score,newgame[2],loadgame[2];
     text t;
     SDL_Surface *screen;
     SDL_Event event;
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     //initialisation des buttons : play,option,quit et du background
 
     inti_in_option(l, ll,&backo);
-    init( qu, pl,op,back,so,mu,sc,&name, yes,no, &yesornooption);
+    init( qu, pl,op,back,so,mu,sc,&name, yes,no, &yesornooption,newgame,loadgame,&score);
     inp( &m);
     initText(&t);
 
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 
         afficher(back[i],screen);
         oo++;
-        if ((o!=2)&&(odone!=1)&&(q!=2)&&(qdone!=1))
+        if ((o!=2)&&(odone!=1)&&(q!=2)&&(qdone!=1)&&(p!=2)&&(pdone!=1)&&(ssc!=2)&&(sdone!=1))
         {
 
             oo++;
@@ -81,12 +81,20 @@ int main(int argc, char** argv)
 {	afficher(yesornooption,screen);
             afficher(yes[y],screen);
             afficher(no[n],screen);}
+           
+            if((p==2)||(pdone==1))
+            {
+            
+            afficher(newgame[new],screen);
+            afficher(loadgame[load],screen);
+            
+            }
+            	if((ssc==2)||(sdone==1))
+            	{
+            	            afficher(score,screen);
+            	}
+            
 
-                  /*  if(event==SDL_MOUSEMOTION)
-                    {
-                        
-
-                }*/
 
         SDL_Flip(screen);
 
@@ -111,6 +119,9 @@ int main(int argc, char** argv)
             q=0;
             o=0;
             ssc=0;
+            new=0;
+            load=0;
+           
 
             if (event.motion.x>275 && event.motion.y>250 && event.motion.x<520 && event.motion.y<350 )
             {
@@ -135,7 +146,6 @@ int main(int argc, char** argv)
             {
                 q=1;
                 c++;
-
             }
             else
 
@@ -145,6 +155,18 @@ int main(int argc, char** argv)
             }
             if(c==1)
                 Mix_PlayChannel(-1, swing, 0);
+            
+            
+            if (event.motion.x>160 && event.motion.y>305  && event.motion.x<630 && event.motion.y<430 )
+            {
+                new=1;
+                c++;
+            }
+             if (event.motion.x>160 && event.motion.y>505  && event.motion.x<630 && event.motion.y<630 )
+            {
+                load=1;
+                c++;
+            }
             break;
 
         // utilisiation du botton gauche de la  souris
@@ -155,6 +177,7 @@ int main(int argc, char** argv)
                 if (p==1)
                 {
                     p=2;
+                    pdone=1;
 
                 }
                 else if (o==1)
@@ -166,9 +189,15 @@ int main(int argc, char** argv)
                 else if (q==1)
                 {
                     q=2;
-qdone=1;
+			qdone=1;
             
-            }}
+            } else if (ssc==1)
+                {
+                    ssc=2;
+			sdone=1;
+            
+            }
+            }
             break;
 
         //utilisation du clavier
@@ -295,8 +324,13 @@ qdone=1;
             case SDLK_ESCAPE:
                 if (odone==1)
                     odone=0;
- if (qdone==1)
+ 		if (qdone==1)
                     qdone=0;
+                    
+ 		if (pdone==1)
+                    pdone=0;
+                    if (sdone==1)
+                    sdone=0;
 
                 break ;
 

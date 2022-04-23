@@ -62,7 +62,7 @@ for(i=0;i<5;i++)
 }
 
 
-void init(image q[],image p[],image o[],image back[],image so[],image m[],image sc[],image *name ,image yes[],image no[] , image *yesornooption)
+void init(image q[],image p[],image o[],image back[],image so[],image m[],image sc[],image *name ,image yes[],image no[] , image *yesornooption,image newgame[],image loadgame[],image *score )
 {
 
 int i;
@@ -77,6 +77,26 @@ if (name->img== NULL) {
 		}
 	name->pos.x = 50;
 	name->pos.y = 50;
+	
+    score->img=IMG_Load("boutons/score/score.png");
+if (score->img== NULL) {
+			printf("hhhhh");
+			return ;
+		}
+	score->pos.x = 50;
+	score->pos.y = 150;
+	
+	newgame[0].img=IMG_Load("boutons/newgame/newgame0.png");
+	newgame[1].img=IMG_Load("boutons/newgame/newgame1.png");
+	
+	loadgame[0].img=IMG_Load("boutons/loadgame/loadgame0.png");
+	loadgame[1].img=IMG_Load("boutons/loadgame/loadgame1.png");
+	
+	
+	
+	
+	
+	
 
     q[0].img=IMG_Load("boutons/quit/q1.png");
     q[1].img=IMG_Load("boutons/quit/q2.png");
@@ -125,47 +145,9 @@ if (name->img== NULL) {
 
 yesornooption->img=IMG_Load("boutons/yesornooption.png");
 yesornooption->pos.x =100;
-yesornooption->pos.y = 144;
+yesornooption->pos.y = 240;
 
 
-for(i=0;i<2;i++)
-{
-if ( sc[i].img== NULL) {
-			return ;
-		}
-	 sc[i].pos.x =210;
-	 sc[i].pos.y = 205;
-
-
-if ( so[i].img== NULL) {
-			return ;
-		}
-	 so[i].pos.x =210;
-	 so[i].pos.y = 440;
-
-
-if ( m[i].img== NULL) {
-			return ;
-		}
-	 m[i].pos.x =210;
-	 m[i].pos.y = 440;
-
-
-if (yes[i].img== NULL) {
-			return ;
-		}
-        yes[i].pos.x = 30;
-	yes[i].pos.y = 388;
-
-if (no[i].img== NULL) {
-			return ;
-		}
-        no[i].pos.x = 240;
-	no[i].pos.y = 388;
-
-
-
-}
 for(i=0;i<3;i++)
 {
 if ( q[i].img== NULL) {
@@ -203,6 +185,63 @@ if (back[i].img == NULL)
 	back[i].pos.w=SCREEN_W; 
 	back[i].pos.h=SCREEN_H;
 }
+
+for(i=0;i<2;i++)
+{
+
+
+if ( sc[i].img== NULL) {
+			return ;
+		}
+	 sc[i].pos.x =210;
+	 sc[i].pos.y = 205;
+
+
+if ( so[i].img== NULL) {
+			return ;
+		}
+	 so[i].pos.x =210;
+	 so[i].pos.y = 440;
+
+
+if ( m[i].img== NULL) {
+			return ;
+		}
+	 m[i].pos.x =210;
+	 m[i].pos.y = 440;
+
+
+if (yes[i].img== NULL) {
+			return ;
+		}
+        yes[i].pos.x = 10;
+	yes[i].pos.y = 290;
+
+if (no[i].img== NULL) {
+			return ;
+		}
+        no[i].pos.x = 290;
+	no[i].pos.y = 290;
+
+
+if ( newgame[i].img== NULL) {
+			return ;
+			printf("ee");
+		}
+	 newgame[i].pos.x =160;
+	 newgame[i].pos.y = 305;
+	 
+	 if ( loadgame[i].img== NULL) {
+	 			printf("ee");
+			return ;
+		}
+	 loadgame[i].pos.x =160;
+	 loadgame[i].pos.y = 505;
+}
+
+
+
+
 
     
 }
