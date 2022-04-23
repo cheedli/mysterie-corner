@@ -200,15 +200,15 @@ if ( sc[i].img== NULL) {
 if ( so[i].img== NULL) {
 			return ;
 		}
-	 so[i].pos.x =210;
-	 so[i].pos.y = 440;
+	 so[i].pos.x =220;
+	 so[i].pos.y = 190;
 
 
 if ( m[i].img== NULL) {
 			return ;
 		}
 	 m[i].pos.x =210;
-	 m[i].pos.y = 440;
+	 m[i].pos.y = 340;
 
 
 if (yes[i].img== NULL) {
