@@ -47,16 +47,3 @@ void free_perso(Personne perso)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-

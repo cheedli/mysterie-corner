@@ -16,7 +16,7 @@ int main(void)
 	
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
 
-	screen=SDL_SetVideoMode(2048,429,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+	screen=SDL_SetVideoMode(1380,800,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 	if(screen==NULL)
 	{
 		printf("unable to set video mode:%s\n",SDL_GetError());
