@@ -62,7 +62,7 @@ for(i=0;i<5;i++)
 }
 
 
-void init(image q[],image p[],image o[],image back[],image so[],image m[],image sc[],image *name ,image yes[],image no[] image *yesornooption)
+void init(image q[],image p[],image o[],image back[],image so[],image m[],image sc[],image *name ,image yes[],image no[] , image *yesornooption)
 {
 
 int i;
@@ -118,11 +118,14 @@ if (name->img== NULL) {
 
    
     yes[0].img=IMG_Load("boutons/yes/y0.png");
+    yes[1].img=IMG_Load("boutons/yes/y1.png");
 
     no[0].img=IMG_Load("boutons/no/n0.png");
-   
-yesornooption.img=IMG_Load("boutons/yesornooption.png");
+       no[1].img=IMG_Load("boutons/no/n1.png");
 
+yesornooption->img=IMG_Load("boutons/yesornooption.png");
+yesornooption->pos.x =100;
+yesornooption->pos.y = 144;
 
 
 for(i=0;i<2;i++)
@@ -148,6 +151,20 @@ if ( m[i].img== NULL) {
 	 m[i].pos.y = 440;
 
 
+if (yes[i].img== NULL) {
+			return ;
+		}
+        yes[i].pos.x = 30;
+	yes[i].pos.y = 388;
+
+if (no[i].img== NULL) {
+			return ;
+		}
+        no[i].pos.x = 240;
+	no[i].pos.y = 388;
+
+
+
 }
 for(i=0;i<3;i++)
 {
@@ -166,7 +183,13 @@ if (p[i].img== NULL) {
 		}
 	p[i].pos.x = 210;
 	p[i].pos.y = 100;
+
+
+
 }
+
+
+
 
 for(i=0;i<16;i++)
 {

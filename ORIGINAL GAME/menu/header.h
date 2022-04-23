@@ -22,7 +22,8 @@ typedef struct
 } text;
 void inp(image *m);
 void inti_in_option(image l[],image ll[],image *backo);
-void init(image q[],image p[],image o[],image back[],image so[],image m[],image sc[],image *name);
+
+void init(image q[],image p[],image o[],image back[],image so[],image m[],image sc[],image *name ,image yes[],image no[] ,image *yesornooption);
 void afficher(image A,SDL_Surface *screen);
 void liberer(image A );
 
