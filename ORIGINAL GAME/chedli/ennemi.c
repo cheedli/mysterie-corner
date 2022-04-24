@@ -67,13 +67,6 @@ void initEnnemi(Ennemi *e)
     e->en.posa[2].h=e->en.a[2]->h;
     e->en.posa[2].w=e->en.a[2]->w/5;
 
-
-
-
-
-
-
-
     //l is boulaaba
 
     e->en.l[0] =IMG_Load("ennemi/bl/bl.png");//runing to the player
@@ -86,25 +79,25 @@ void initEnnemi(Ennemi *e)
     e->en.posl[1].h=e->en.l[1]->h;
     e->en.posl[1].w=e->en.l[1]->w/4;
 
-    /*
 
-            //c is bouchkara
 
-            e->en.c[0] =IMG_Load("graphic/menu/.png");//coming to the player
+    //c is bouchkara
 
-            e->en.posc[0].h=e->en.c[0]->h;
-            e->en.posc[0].w=e->en.c[0]->w/3;
+    e->en.c[0] =IMG_Load("ennemi/bc/walk.png");//coming to the player
 
-            e->en.posc[1] =IMG_Load("graphic/menu/.png");//attacking
+    e->en.posc[0].h=e->en.c[0]->h;
+    e->en.posc[0].w=e->en.c[0]->w/8;
 
-            e->en.posc[1].h=e->en.c[1]->h;
-            e->en.posc[1].w=e->en.c[1]->w/3;
+    e->en.c[1] =IMG_Load("ennemi/bc/a.png");//attacking
 
-            e->en.posc[2] =IMG_Load("graphic/menu/.png");//dead
+    e->en.posc[1].h=e->en.c[1]->h/2;
+    e->en.posc[1].w=e->en.c[1]->w/17;
 
-            e->en.posc[2].h=e->en.c[2]->h;
-            e->en.posc[2].w=e->en. c[2]->w/3;
-            */
+    e->en.c[2] =IMG_Load("ennemi/bc/dead.png");//dead
+
+    e->en.posc[2].h=e->en.c[2]->h;
+    e->en.posc[2].w=e->en.c[2]->w/8;
+
     for(i=0; i<3; i++)
 
     {
@@ -122,10 +115,11 @@ void initEnnemi(Ennemi *e)
         e->pos[2].h=e->en.l[0]->h;
         e->pos[2].w=e->en.l[0]->w/8;
 
-        e->pos[3].x=0;
-        e->pos[3].y=0;
+        e->pos[3].x=500;
+        e->pos[3].y=320;
+        e->pos[3].h=e->en.c[0]->h;
+        e->pos[3].w=e->en.c[0]->w/8;
     }
-
 }
 
 /**
@@ -134,6 +128,8 @@ void initEnnemi(Ennemi *e)
 * @param screen is the screen
 * @return Nothing
 */
+
+
 
 void afficherEnnemi(Ennemi e, SDL_Surface * screen)
 
@@ -150,7 +146,7 @@ void afficherEnnemi(Ennemi e, SDL_Surface * screen)
         SDL_BlitSurface(e.en.l[e.etat],&e.en.posl[e.etat],screen,&e.pos[e.level]);
         break;
     case 3:
-        SDL_BlitSurface(e.en.b[e.etat],&e.en.posb[e.etat],screen,&e.pos[e.level]);
+        SDL_BlitSurface(e.en.c[e.etat],&e.en.posc[e.etat],screen,&e.pos[e.level]);
         break;
 
     }
@@ -200,13 +196,14 @@ void animerEnnemi( Ennemi * e)
             {
                 e->en.posa[e->etat].x +=  e->en.posa[e->etat].w;
             }
+
             SDL_Delay(400);
 
             break;
 
         }
         break;
-        
+
     case 2:
         switch(e->etat)
         {
@@ -229,12 +226,43 @@ void animerEnnemi( Ennemi * e)
                 e->en.posl[e->etat].x =0;
 
             }
-            SDL_Delay(120);
+            SDL_Delay(50);
 
             break;
 
+
         }
         break;
+    case 3:
+        switch(e->etat)
+        {
+        case 0:
+            if(e->en.posc[e->etat].x <1400)
+                e->en.posc[e->etat].x +=  e->en.posc[e->etat].w;
+            else
+            {
+                e->en.posc[e->etat].x =0;
+                e->pos[e->level].x =500;
+            }
+            SDL_Delay(230);
+            break ;
+
+        case 1:
+            if(e->en.posl[e->etat].x <600)
+                e->en.posl[e->etat].x +=  e->en.posl[e->etat].w;
+            else
+            {
+                e->en.posl[e->etat].x =0;
+
+            }
+            SDL_Delay(50);
+
+            break;
+
+
+
+
+        }
 
     }
 }
@@ -267,21 +295,24 @@ void deplacerIA(Ennemi *e)
                 e->pos[e->level].x -= 15;
             }
             break ;
-            
-        }break;
-        case 2:
+
+        }
+        break;
+
+    case 2:
         switch(e->etat)
         {
         case 0:
 
             if(e->en.posl[e->etat].x >=400)
             {
-                e->pos[e->level].x += 15;
+                e->pos[e->level].x -= 15;
             }
             else if(e->pos[e->level].x <400)
 
                 e->pos[e->level].x-=15;
             break ;
+
         case 1:
 
             if((e->pos[e->level].x <=1000)&&(e->pos[e->level].x >=400))
@@ -290,6 +321,29 @@ void deplacerIA(Ennemi *e)
             }
             break ;
         }
+        break;
+
+    case 3:
+        switch(e->etat)
+        {
+        case 0:
+
+            if(e->en.posc[e->etat].x <=800)
+            {
+                e->pos[e->level].x -= 15;
+            }
+            else if(e->pos[e->level].x >0)
+
+                e->pos[e->level].x += 15;
+        case 1:
+
+            if((e->pos[e->level].x <=1000)&&(e->pos[e->level].x >=400))
+            {
+                e->pos[e->level].x -= 15;
+            }
+            break ;
+        }
+        break;
     }
 }
 
