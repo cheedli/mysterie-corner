@@ -1,4 +1,4 @@
- #ifndef test_H_INCLUDED
+#ifndef test_H_INCLUDED
 #define test_H_INCLUDED
 
 #include <stdio.h>
@@ -13,12 +13,12 @@
 
 typedef struct perso
 {
-double vitesse,   acceleration;
-SDL_Surface *personnage;
+double vitesse[4],   acceleration;
+SDL_Surface *personnage[4];
 SDL_Rect rect;
-SDL_Rect pos_sprite;
+SDL_Rect pos_sprite[4];
 
-float vitesse_V;
+float vitesse_V[4];
 int direction ; 
 /*
 les directions:
@@ -26,7 +26,6 @@ les directions:
 1:droite
 2:gauche
 3: jump
-
 */
 
 }perso;
