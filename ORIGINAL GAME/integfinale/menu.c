@@ -1,5 +1,7 @@
 #include "menu.h"
+#include "perso.h"
 #include "enigme.h"
+#include "minimap.h"
 ///////////////////////////////////////////////////////////////
 
 void inp(image m[],image e[],image f[],image lettre[])
@@ -298,12 +300,18 @@ void menu()
 {
     TTF_Init();
     SDL_Init ( SDL_INIT_VIDEO );
+
     //declaration des variables
-    int done=1,solo=0,multi=0,odone=0,o=0,p=0,q=0,i=0,oo=0,s=4,ef=4,ss,c=0, sso=0,ssc=0,mmu=0,y=0,n=0,new=0,qdone=0,pdone=0,sdone=0,load=0,ndone=0,newdone=0,mus=0,effect=0,fleche=1,let=0;
+    perso per;
+    Input in;
+    	TTF_Font *police = NULL;
+    	police = TTF_OpenFont("minimap/avocado.ttf", 30);
+    int  verif=1,done=1,solo=0,multi=0,odone=0,o=0,p=0,q=0,i=0,oo=0,s=4,ef=4,ss,c=0,d=1, sso=0,ssc=0,mmu=0,y=0,n=0,new=0,qdone=0,pdone=0,sdone=0,load=0,ndone=0,newdone=0,mus=0,effect=0,fleche=1,let=0,solodone=0;
     image back[16],pl[3],op[3],qu[3],l[5],ll[5],so[2],sc[2],mu[2],name,yes[2],no[2],yesornooption,m[2],e[2],backo,score,newgame[2],loadgame[2],lettre[2],f[2];
     text t;
     SDL_Surface *screen;
     SDL_Event event;
+    initialiser_perso (&per);
     //affectation de l'ecran en la variable : screen
     screen = SDL_SetVideoMode(1300, 782, 32,SDL_HWSURFACE|SDL_SWSURFACE|SDL_RESIZABLE|SDL_DOUBLEBUF);
     if ( !screen )
@@ -315,6 +323,7 @@ void menu()
     init( qu, pl,op,back,so,mu,sc,&name, yes,no, &yesornooption,newgame,loadgame,&score);
     inp( m,e,f,lettre);
     initText(&t);
+    char chedli[30]="";
     //introduction musique
     int vm=100, vsfx=100;
     Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
@@ -339,7 +348,7 @@ void menu()
 
         Mix_VolumeMusic((vm/4)*s);
         Mix_VolumeChunk(swing,(vsfx/4)*ef);
-        if ((o!=2)&&(odone!=1)&&(q!=2)&&(qdone!=1)&&(p!=2)&&(pdone!=1)&&(ssc!=2)&&(sdone!=1)&&(newdone!=1)&&((pdone!=1)&&(newdone==0)))
+        if ((o!=2)&&(odone!=1)&&(q!=2)&&(qdone!=1)&&(p!=2)&&(pdone!=1)&&(ssc!=2)&&(sdone!=1)&&(newdone!=1)&&((pdone!=1)&&(newdone==0))&& solo!=2&&solodone==0)
         {
             afficher(pl[p],screen);
             afficher(op[o],screen);
@@ -347,9 +356,26 @@ void menu()
             afficher(name,screen);
             afficher(sc[ssc],screen);
             displayText(t,screen);
+            d=1;
         }
+        if((solo==2)||solodone==1)
+        {
+            oo++;
+            
+if(d)
+{
+afficher_perso (per,screen);
+            animation (&per,in);
+d=clavier (chedli,screen,police);
 
-        if((new==2 || newdone==1)&&(pdone!=0)&&(ssc!=2)&&(sdone!=1))
+}
+else 
+{
+sdone=0;
+solo=0;
+}
+        }
+        if((new==2 || newdone==1)&&(pdone!=0)&&(ssc!=2)&&(sdone!=1)&&solodone==0)
         {
             oo++;
             afficher(mu[multi],screen);
@@ -431,11 +457,13 @@ void menu()
                 let=1;
                 c++;
             }
+            if(newdone==1)
+            {
             if (event.motion.x>270&& event.motion.y>320 && event.motion.x<550 && event.motion.y<420)
             {
                 solo=1;
                 c++;
-            }
+            }}
             if (event.motion.x>220&& event.motion.y>500 && event.motion.x<420 && event.motion.y<660 )
             {
                 multi=1;
@@ -509,6 +537,13 @@ void menu()
                         load=2;
                         p=0;
                     }
+                }
+                
+                if(solo==1)
+                {
+                    solo=2;
+                    solodone=1;
+
                 }
 
                 if ((y==1) && (qdone==1))
@@ -714,8 +749,9 @@ void menu()
                     newdone=0;
                     new=0;
                     pdone=1;
-
                 }
+                if (solodone==1)
+                solodone=0;
                 break ;
             case SDLK_m:
                 if(s=!0)
@@ -759,6 +795,7 @@ void menu()
             }
             break;
         case SDL_QUIT:
+        
             done=0;
             break;
         }

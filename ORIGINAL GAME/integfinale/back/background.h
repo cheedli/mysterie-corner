@@ -1,43 +1,52 @@
-#ifndef BACKGROUND_H_INCLUDE
-#define BACKGROUND_H_INCLUDE
-#include <stdlib.h>
+#ifndef bg_H_INCLUDED
+#define bg_H_INCLUDED
+
 #include <stdio.h>
+#include <stdlib.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 #include <SDL/SDL_mixer.h>
-#include "pres.h"
 
-#define SCREEN_W 1360
-#define SCREEN_H 765
+
+////////// structure de background
 
 typedef struct
 {
-	SDL_Surface *imgback;
-	SDL_Rect posback;
-	SDL_Rect posback2;
-	SDL_Rect camera;
-	SDL_Rect camera2;
-	Mix_Music *son;
-	SDL_Surface *image_flower;  
-	SDL_Rect pos_image_flower;
-	SDL_Rect single_flower;	
-	int flower_num;
+    SDL_Surface *image[3],*masque[3],*bird[3];//3ana 3 image t3 background o leur 3 masque et 3 image mt3 l bird 
+    SDL_Rect positionbackground,positionbird;
+    SDL_Rect positionback_partage;
+    int level,partage,compteur;
+    //chaque niveau andou l background l khassa byh haka aleh st7a9ina heja ismha level
+    //compteur c'est pour l animation du oiseau
+    //partage pour verifier si le joueur yhb yaaml multijoueuur wala solo
+    SDL_Rect camera1;
+    SDL_Rect camera2;
+} background;
+
+///// structure de deplacement
+
+typedef struct
+{
+    int left, right,d,q;
+} mouvement;
+
+typedef struct
+{
+    SDL_Surface *img;
+    SDL_Rect pos_perso ;
+} personne;//structure hedhy c'est seulement pour le test
 
 
-}background;
-void afficher_back(background b, SDL_Surface *ecran);
-void initialisation_back(background *b);
-void initBack (background *b);
-void initBackMasque (background *b);
-void initBack2 (background *b);
-void afficheBack (background b,SDL_Surface *ecran);
-void afficheBack2 (background b,SDL_Surface *ecran);
-void scrolling (background *b,int direction);
-void animerBackground(background *b);
-void displayFlower(background b,SDL_Surface *ecran);
 
-SDL_Color getpixel(SDL_Surface *psurface,int x,int y);
-int collisionparfaite(SDL_Surface *psurface,Personne perso);
-void collision(SDL_Surface *psurface,Personne *perso);
+void initBack(background *b);
+void aficherBack(SDL_Surface *screen, background *b);
+void scrolling(background *b, SDL_Surface *screen, mouvement M);
+SDL_Color GetPixel(SDL_Surface *psurface, int x, int y);
+int  collisionparfaite(SDL_Surface *psurface,personne p);
+void animerBackground( background * b);
+void init_Mouvement(mouvement *M);
+void collision(SDL_Surface *psurface,personne *p,personne *pp);
 
-#endif  
+#endif
+

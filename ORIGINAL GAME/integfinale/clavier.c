@@ -1,4 +1,4 @@
-#include "minimap.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
@@ -6,25 +6,21 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 #include <string.h>
-void clavier (char *nom[])
-{   SDL_Surface *screen=NULL,*image,*a,*z,*e,*r,*t,*y,*u,*i,*o,*p,*q,*s,*d,*f,*g,*h,*j,*k,*l,*m,*w,*x,*c,*v,*b,*n,*ok,*texte,*delete;
-    SDL_Rect 					   			         postionimage,posa,posz,pose,posr,post,posy,posu,posi,poso,posp,posq,poss,
-posd,posf,posg,posh,posj,posk,posl,posm,posw,posx,posc,posv,posb,posn,posok,position_text={530,230},posdelete;
+#include "minimap.h"
+int clavier (char *nom[], SDL_Surface *screen ,TTF_Font *police)
+{   SDL_Surface *a,*z,*e,*r,*t,*y,*u,*i,*o,*p,*q,*s,*d,*f,*g,*h,*j,*k,*l,*m,*w,*x,*c,*v,*b,*n,*ok,*texte,*delete;
+    SDL_Rect postionimage,posa,posz,pose,posr,post,posy,posu,posi,poso,posp,posq,poss,
+posd,posf,posg,posh,posj,posk,posl,posm,posw,posx,posc,posv,posb,posn,posok,position_text={400,430},posdelete;
     SDL_Event event;
     int done=1;
     char rep[30]="";
-    TTF_Font *police = NULL;
-    SDL_Color couleurBlanche = {127,20,0};// couleur de texte
-    TTF_Init();
-    SDL_Init(SDL_INIT_VIDEO);
-    
-    screen=SDL_SetVideoMode(1380,700,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
-    
+     
+    SDL_Color couleurBlanche = {255,255,255};// couleur de texte
+ 
 
+  
+  
 
-    image=IMG_Load("background.png");
-    postionimage.x=0;
-    postionimage.y=0;
 	delete=IMG_Load("minimap/delete.png");
 	a=IMG_Load("minimap/a.png");
 	z=IMG_Load("minimap/z.png");
@@ -53,72 +49,69 @@ posd,posf,posg,posh,posj,posk,posl,posm,posw,posx,posc,posv,posb,posn,posok,posi
 	b=IMG_Load("minimap/b.png");
 	n=IMG_Load("minimap/n.png");
 	ok=IMG_Load("minimap/ok.png");	
-	posa.x=400;
-	posa.y=300;
-	posz.x=450;
-	posz.y=300;
-	pose.x=500;
-	pose.y=300;
-	posr.x=550;
-	posr.y=300;
-	post.x=600;
-	post.y=300;
-	posy.x=650;
-	posy.y=300;
-	posu.x=700;
-	posu.y=300;
-	posi.x=750;
-	posi.y=300;
-	poso.x=800;
-	poso.y=300;
-	posp.x=850;
-	posp.y=300;
+	posa.x=200;
+	posa.y=550;
+	posz.x=250;
+	posz.y=550;
+	pose.x=300;
+	pose.y=550;
+	posr.x=350;
+	posr.y=550;
+	post.x=400;
+	post.y=550;
+	posy.x=450;
+	posy.y=550;
+	posu.x=500;
+	posu.y=550;
+	posi.x=550;
+	posi.y=550;
+	poso.x=600;
+	poso.y=550;
+	posp.x=650;
+	posp.y=550;
 	
-	posq.x=400;
-	posq.y=350;
-	poss.x=450;
-	poss.y=350;
-	posd.x=500;
-	posd.y=350;
-	posf.x=550;
-	posf.y=350;
-	posg.x=600;
-	posg.y=350;
-	posh.x=650;
-	posh.y=350;
-	posj.x=700;
-	posj.y=350;
-	posk.x=750;
-	posk.y=350;
-	posl.x=800;
-	posl.y=350;
-	posm.x=850;
-	posm.y=350;
-	
-	posw.x=500;
-	posw.y=400;
-	posx.x=550;
-	posx.y=400;
-	posc.x=600;
-	posc.y=400;
-	posv.x=650;
-	posv.y=400;
-	posb.x=700;
-	posb.y=400;
-	posn.x=750;
-	posn.y=400;
-	posok.x=800;
-	posok.y=400;
-	posdelete.x=450;
-	posdelete.y=400;
+	posq.x=200;
+	posq.y=600;
+	poss.x=250;
+	poss.y=600;
+	posd.x=300;
+	posd.y=600;
+	posf.x=350;
+	posf.y=600;
+	posg.x=400;
+	posg.y=600;
+	posh.x=450;
+	posh.y=600;
+	posj.x=500;
+	posj.y=600;
+	posk.x=550;
+	posk.y=600;
+	posl.x=600;
+	posl.y=600;
+	posm.x=650;
+	posm.y=600;
+
+	posw.x=300;
+	posw.y=650;
+	posx.x=350;
+	posx.y=650;
+	posc.x=400;
+	posc.y=650;
+	posv.x=450;
+	posv.y=650;
+	posb.x=500;
+	posb.y=650;
+	posn.x=550;
+	posn.y=650;
+	posok.x=600;
+	posok.y=650;
+	posdelete.x=250;
+	posdelete.y=650;
 	//pos.x=50;
 	//pos.y=250;
 
-	police = TTF_OpenFont("minimap/Montserrat-Regular.ttf", 30);
-	
 
-        SDL_BlitSurface(image, NULL,screen,&postionimage);
-	SDL_BlitSurface(a,NULL,screen,&posa);
+	  SDL_BlitSurface(a,NULL,screen,&posa);
 	SDL_BlitSurface(z,NULL,screen,&posz);
 	SDL_BlitSurface(e,NULL,screen,&pose);
 	SDL_BlitSurface(r,NULL,screen,&posr);
@@ -144,16 +137,15 @@ posd,posf,posg,posh,posj,posk,posl,posm,posw,posx,posc,posv,posb,posn,posok,posi
 	SDL_BlitSurface(v,NULL,screen,&posv);
 	SDL_BlitSurface(b,NULL,screen,&posb);
 	SDL_BlitSurface(n,NULL,screen,&posn);
-    SDL_BlitSurface(ok,NULL,screen,&posok);
-	 SDL_BlitSurface(delete,NULL,screen,&posdelete);
-	SDL_Flip(screen);
+	SDL_BlitSurface(ok,NULL,screen,&posok);
 
-
-    while(done)
-    {  
+	SDL_BlitSurface(delete,NULL,screen,&posdelete);
 	
-    
-     SDL_WaitEvent(&event);
+
+
+  
+        	strcpy(rep,nom);
+     SDL_PollEvent(&event);
      switch(event.type)
 
      {  case SDL_QUIT: 
@@ -166,12 +158,7 @@ posd,posf,posg,posh,posj,posk,posl,posm,posw,posx,posc,posv,posb,posn,posok,posi
    (event.button.y<posa.y+a->h&&event.button.y>posa.y))
 
             {
-	strcat(rep,"A");
-	
-
-        
-
-		}
+	strcat(rep,"A");}
 		 if((event.button.button==SDL_BUTTON_LEFT)&&(event.button.x<posz.x+z->w&&event.button.x>posz.x)&&
 (event.button.y<posz.y+z->h&&event.button.y>posz.y))
 
@@ -340,41 +327,15 @@ if((event.button.button==SDL_BUTTON_LEFT)&&(event.button.x<posdelete.x+delete->w
       
      }  
 texte = TTF_RenderText_Blended(police, rep, couleurBlanche);	
-	SDL_BlitSurface(image, NULL,screen,&postionimage); 
-       SDL_BlitSurface(a,NULL,screen,&posa);
-	SDL_BlitSurface(z,NULL,screen,&posz);
-	SDL_BlitSurface(e,NULL,screen,&pose);
-	SDL_BlitSurface(r,NULL,screen,&posr);
-	SDL_BlitSurface(t,NULL,screen,&post);
-	SDL_BlitSurface(y,NULL,screen,&posy);
-	SDL_BlitSurface(u,NULL,screen,&posu);
-	SDL_BlitSurface(i,NULL,screen,&posi);
-	SDL_BlitSurface(o,NULL,screen,&poso);
-	SDL_BlitSurface(p,NULL,screen,&posp);
-	SDL_BlitSurface(q,NULL,screen,&posq);
-	SDL_BlitSurface(s,NULL,screen,&poss);
-	SDL_BlitSurface(d,NULL,screen,&posd);
-	SDL_BlitSurface(f,NULL,screen,&posf);
-	SDL_BlitSurface(g,NULL,screen,&posg);
-	SDL_BlitSurface(h,NULL,screen,&posh);
-	SDL_BlitSurface(j,NULL,screen,&posj);
-	SDL_BlitSurface(k,NULL,screen,&posk);
-	SDL_BlitSurface(l,NULL,screen,&posl);
-	SDL_BlitSurface(m,NULL,screen,&posm);
-	SDL_BlitSurface(w,NULL,screen,&posw);
-	SDL_BlitSurface(x,NULL,screen,&posx);
-	SDL_BlitSurface(c,NULL,screen,&posc);
-	SDL_BlitSurface(v,NULL,screen,&posv);
-	SDL_BlitSurface(b,NULL,screen,&posb);
-	SDL_BlitSurface(n,NULL,screen,&posn);
-	SDL_BlitSurface(ok,NULL,screen,&posok);
-	SDL_BlitSurface(texte, NULL,screen,&position_text);
-	SDL_BlitSurface(delete,NULL,screen,&posdelete);
+
+     
+		SDL_BlitSurface(texte, NULL,screen,&position_text);
         SDL_Flip(screen);
 
 	
-    }
+    
 	strcpy(nom,rep);
 
-   
+   return done;
+
 }

@@ -39,6 +39,7 @@ typedef struct temps
  int min, sec;// minutes et secondes
 }temps;
 
+
 //fonctions:
 
 //fonction map
@@ -53,7 +54,7 @@ void afficher_score(score *s,SDL_Surface *screen,int valeur_score);
 //fonction save
 void save (int valeur_score,char nom[]);
 void load (int valeur_score ,char nom[]);
-void clavier (char *nom[]);//LA FONCTION QUI REPRESENTE CLAVIER
+int clavier (char *nom[], SDL_Surface *screen ,TTF_Font *police);
 
 //fonction temps
 void initialiser_temps(temps *t);

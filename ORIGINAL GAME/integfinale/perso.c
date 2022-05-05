@@ -15,7 +15,7 @@ void initialiser_perso (perso *p)
     p->pos_sprite[2].w=p->personnage[2]->w/5;
     p->pos_sprite[3].w=p->personnage[3]->w/5;
     p->rect.x=0;//perso
-    p->rect.y=250;
+    p->rect.y=535;
 
 
     for(i=0; i<4; i++)
@@ -82,7 +82,7 @@ void movePerso(perso *p,Uint32 dt,Input i)
 }
 void saut (perso *p)
 {
-    if(p->rect.y==250)//collision with ground=300 sinon maynajmch
+    if(p->rect.y==450)//collision with ground=300 sinon maynajmch
         p->vitesse_V[1] = -60;// verticale (yatlaa fouk)
 }
 void initialiser_input (Input *I)
@@ -160,42 +160,42 @@ void persooo()
             }
         }
         if (I.right==1)
-        {
-            p.direction=2;
-            p.acceleration+=0.05;
-            p.vitesse[2]=5;
-        }
-        else if (I.left==1 )
-        {
-            p.direction=3;
-            p.acceleration+=0.05;
-            p.vitesse[3]=5;
-        }
-        else if (I.jump==1)
-        {
-            saut(&p);
-        }
-        else if(I.jump==0 && I.right==0 && I.left==0 )
-            p.direction=0;
-        SDL_Delay(4);//yekber lwakt dt
-        dt=SDL_GetTicks() - t0;
-        //movePerso(&p,dt,I);
-        p.acceleration-=0.02;// k nsayb l bouton
-        if (p.acceleration<=0)
-        {
-            p.acceleration=0;
-        }
-        if (p.acceleration>=0.7)
-        {
-            p.acceleration=0.7;
-        }
-        p.vitesse_V[1]+=GRAVITY;//vitesse verticale naks 10 tjrs
-        p.rect.y += p.vitesse_V[1];//yzidha -60
-        if(p.rect.y >= 250)
-        {
-            p.rect.y= 250;//wsel ground
+    {
+        p.direction=2;
+        p.acceleration+=0.05;
+        p.vitesse[2]=5;
+    }
+    else if (I.left==1 )
+    {
+        p.direction=3;
+        p.acceleration+=0.05;
+        p.vitesse[3]=5;
+    }
+    else if (I.jump==1)
+    {
+        saut(&p);
+    }
+    else if(I.jump==0 && I.right==0 && I.left==0 )
+        p.direction=0;
+    SDL_Delay(4);//yekber lwakt dt
+    dt=SDL_GetTicks() - t0;
+   movePerso(&p,dt,I);
+    p.acceleration-=0.02;// k nsayb l bouton
+    if (p.acceleration<=0)
+    {
+        p.acceleration=0;
+    }
+    if (p.acceleration>=0.7)
+    {
+        p.acceleration=0.7;
+    }
+    p.vitesse_V[1]+=GRAVITY;//vitesse verticale naks 10 tjrs
+    p.rect.y += p.vitesse_V[1];//yzidha -60
+    if(p.rect.y >= 600)
+    {
+        p.rect.y= 600;//wsel ground
 
-        }
+    }
     }
 
 }

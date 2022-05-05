@@ -1,136 +1,159 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+#include <SDL/SDL_mixer.h>
 #include "background.h"
+#include "perso.h"
 
-
-
-
-void initBackMasque (background *b)
+void initBack(background *b)
 {
-//background
-    b->imgback=IMG_Load("masquen2.png");
-    b->posback.x=0;
-    b->posback.y=0;
+//initialisation mta3 les image ly bch nest7a9ohom ly houma 3 background o leur masque(l masque bch nest7a9ouh lil colision baadika)
 
-//camera
-    b->camera.x=0;
-    b->camera.y=0;
-    b->camera.w=1380;
-    b->camera.h=800;
-    b->son=Mix_LoadMUS("musique.mp3");
+    b->image[0] = IMG_Load("back/n2.png");
+    b->image[1] = IMG_Load("back/1.png");
+    b->image[2] = IMG_Load("back/2.png");
+
+    b->masque[0]=IMG_Load("back/masquen2.png");
+    b->masque[1]=SDL_LoadBMP("back/1masque.bmp");
+    b->masque[2]=SDL_LoadBMP("back/2masque.bmp");
+
+
+//initialisation t3 l bird pour la fonction d'animation
+
+    b->bird[0] = IMG_Load("back/anim/0.gif");
+    b->bird[1] = IMG_Load("back/anim/1.gif");
+    b->bird[2] = IMG_Load("back/anim/2.gif");
+    //initialisation mt3 l bird mnin bch ybda yet7ark
+    b->positionbird.x=0;
+    b->positionbird.y=0;
+
+//// initialisation position background1
+
+    b->positionbackground.x = 0;
+    b->positionbackground.y = 0;
+    b->positionbackground.w = 0;
+    b->positionbackground.h = 0;
+
+
+//// initialisation position camera 1
+
+    b->camera1.x = 0;
+    b->camera1.y = 0;
+    b->camera1.w = 1380;
+    b->camera1.h = 1000;
+
+//fama background 1 o  background 2 . 1 pour solo et 2 pour le partage d'ecran ily nty bch tet7akm bih fyl main si b.partage =1 alors fama partage d'ecran sin par defaut feha ecran barka
+
+
+
+//// initialisation position background 2
+
+    b->positionback_partage.x = 650;
+    b->positionback_partage.y = 0;
+    b->positionback_partage.h = 0;
+    b->positionback_partage.w = 0;
+
+
+//// initialisation position camera 2
+    b->camera2.x = 0;
+    b->camera2.y = 0;
+    b->camera2.w = 800;
+    b->camera2.h = 1000;
+
+    b->compteur=-1;
+
 }
 
-void initBack2 (background *b)
+void aficherBack(SDL_Surface *screen,background *b)
 {
-//background2
-    b->imgback=IMG_Load("n2.png");
-    b->posback2.x=0;
-    b->posback2.y=0;
-//camera2
-    b->camera2.x=0;
-    b->camera2.y=0;
-    b->camera2.w=1380;
-    b->camera2.h=800;
-//musique
-    b->son=Mix_LoadMUS("musique.mp3"); //Chargement de la musique
-    b->image_flower=IMG_Load("flower.png");
-    b->pos_image_flower.x=100;
-    b->pos_image_flower.y=300;
+//cette fonction va afficher l background o l masque (l masque b m3na ekher bch ytkhaba wra background ha9aneya o l colision kn bch tol9t loun l ak7el bch traj3 lil main o scrolling ye9f)
 
-    b->single_flower.w=56;
-    b->single_flower.h=107;
-    b->single_flower.x=0;
-    b->single_flower.y=0;
-
-    b->flower_num=0;
-
-}
+    SDL_BlitSurface(b->masque[b->level], &b->camera1, screen, &b->positionbackground); /// blite de 1ere background
+    SDL_BlitSurface(b->image[b->level], &b->camera1, screen, &b->positionbackground); /// blite de 1ere background
 
 
-void initialisation_back(background *b)
-{
-    //initBackMasque(b);
-    initBack2(b);
-}
-
-
-
-void afficheBack (background b, SDL_Surface *ecran)
-{
-    /* On blitte par-dessus l'écran */
-    Mix_PlayMusic(b.son, -1);
-    SDL_BlitSurface(b.imgback,&b.camera,ecran,&b.posback);
-}
-
-void afficheBack2 (background b, SDL_Surface *ecran)
-{
-    /* On blitte par-dessus l'écran */
-    Mix_PlayMusic(b.son, -1); //Jouer infiniment la musique
-    SDL_BlitSurface(b.imgback,&b.camera2,ecran,&b.posback2);
-    displayFlower(b,ecran);
-
-}
-/*void afficher_back(background b, SDL_Surface *ecran)
-{
-	afficheBack(b,ecran);
-	afficheBack2(b,ecran);
-
-}*/
-
-void scrolling (background *b,int direction)
-{
-    const int speed=20;
-    if (direction ==0) //right
+//idha l player khter multiplayer fyl menu mt3k l ecran bch yt9sam sur 2
+    if(b->partage==1)
     {
-        b->camera.x+= speed;
-
-        b->camera2.x+= speed;
-
+        SDL_BlitSurface(b->masque[b->level], &b->camera2, screen, &b->positionback_partage); /// blite de 1ere background
+        SDL_BlitSurface(b->image[b->level], &b->camera2, screen, &b->positionback_partage);/// blite de 2eme background avec partage
     }
-    else if (direction ==1) //left
-    {
-        b->camera.x-=speed;
-
-        b->camera2.x-=speed;
-    }
-
-
-    else if (direction ==2) //up
-    {
-        b->camera.y-= speed;
-
-        b->camera2.y-= speed;
-    }
-    else if (direction ==3) //down
-    {
-        b->camera.y+= speed;
-
-        b->camera2.y+= speed;
-    }
-
 }
 
 
-void displayFlower(background b,SDL_Surface *ecran)
+
+//l fonction scrolling normalmonnt matekhdm ila matkounch fama collision en cas ou y a collision bch te9ef yaani maynjm yt3ada ila mayji fou9 l obstacles o yt3adeh
+void scrolling(background *b, SDL_Surface *screen, mouvement M)
+{
+//il va afficher tasswira ta3 l assfoura(najmou nhotou ay tasswira theb aleha c'est un exemple)
+    SDL_BlitSurface(b->bird[b->compteur],NULL,screen,&b->positionbird);
+
+//tawa selon l movement ily bch yaamlou bch yssir scrolling ya ymchi ymin ya yssar(tnjm t9oli chbyh famch up o down hekom teb3in l personnage de plus maysirch scrolling l fou9 o louta yaani)
+
+    if (M.right == 1 )
+    {
+        if (b->camera1.x < 5000)
+        {
+            b->camera1.x += 10;
+        }
+    }
+    if (M.left == 1)
+    {
+        if (b->camera1.x > 0)
+        {
+            b->camera1.x -= 10;
+        }
+    }
+    //btbi3a manansawouch si joueur khtar l option t3 multipayer lezm yssir scrolling bin les 2 ecran o kol whda tescrolli wahdha so 2eme joueur bch yt7ark bl d et qo l 1er joueur bch yt7ark bl les fleches
+
+    if(b->partage==1)
+    {
+
+        if (M.d == 1)
+        {
+            if (b->camera2.x < 2100)
+            {
+                b->camera2.x += 10;
+            }
+        }
+
+        if (M.q == 1)
+        {
+            if (b->camera2.x > 0)
+            {
+                b->camera2.x -= 10;
+            }
+        }
+    }
+    
+}
+
+
+///// initialisation des deplacement
+void init_Mouvement(mouvement *M)
+{
+    M->left = 0;
+    M->right = 0;
+    M->q = 0;
+    M->d = 0;
+
+}
+//animation t3 l 3assfour 3assfour fyh 3 tssawer kol mara bch nwariw whda mnhom 9aadin nharkou b entier ismou b->compteur o tsawer m 0 lil 2 ill suffit b->compteur=2 bch trja l awel tasswira de plus bch ybda y9adm bsyeesa bsyessa
+void animerBackground( background * b)
 {
 
-    SDL_BlitSurface(b.image_flower,&(b.single_flower), ecran, &b.pos_image_flower);
-}
-void animerBackground(background *b)
-{
-
-    if (b->flower_num >=0 && b->flower_num <8)
-    {
-        b->single_flower.x=b->flower_num * b->single_flower.w;
-        b->flower_num++;
-    }
-
-    if ( b->flower_num == 8)
-    {
-        b->single_flower.x=b->flower_num * b->single_flower.w;
-        b->flower_num=0;
-    }
-
+    if(b->compteur==2)
+        b->compteur=0;
+    else
+        b->compteur++;
+    b->positionbird.x+=1;
+    SDL_Delay(50);
 
 }
+//l fonction hedhy mawjouda fyl atelier t3 l colision  huwa l concept t3 colision huwa il suffit l9a rectangle ak7el bch tssyr l colision o rectangle l ak7el heka yaanirahou obstacle o maynjmch yt3ada ila maybdl l position mte3ou  en conclusion l fonction getpixel  bch traj3lk l position ly feha joueur est que fyl position heky bdhet l pixel ka7la wala le
+
 SDL_Color getpixel(SDL_Surface *pSurface,int x,int y)
 {
     SDL_Color color;
@@ -140,15 +163,20 @@ SDL_Color getpixel(SDL_Surface *pSurface,int x,int y)
     pPosition+= (pSurface->format->BytesPerPixel *x);
     memcpy(&col,pPosition,pSurface->format->BytesPerPixel);
     SDL_GetRGB(col,pSurface->format, &color.r, &color.g, &color.b);
+
     return (color);
 }
+//kif mafama fyl atelier on va tester tous les cas ly tnjm trahom fyl tabx o taby o il suffit wahda mnhom masset fy obstacles bch yrj3l anaheya l position ly jet feha obstacles sin ya pas du colision
+
 int  collisionparfaite(SDL_Surface *psurface,perso p)
 {
-    int tabx[7],taby[7],i;
+    int tabx[8],taby[8],i;
     SDL_Color color1,color;
+
     color1.r = 0;
     color1.g = 0;
     color1.b = 0;
+
     tabx[0]=p.rect.x;
     tabx[1]=(p.rect.x)+((p.rect.w)/2);
     tabx[2]=(p.rect.x+p.rect.w);
@@ -157,6 +185,7 @@ int  collisionparfaite(SDL_Surface *psurface,perso p)
     tabx[5]=(p.rect.x)+((p.rect.w)/2);
     tabx[6]=(p.rect.x+p.rect.w);
     tabx[7]=(p.rect.x+p.rect.w);
+
     taby[0]=p.rect.y;
     taby[1]=p.rect.y;
     taby[2]=p.rect.y;
@@ -168,50 +197,18 @@ int  collisionparfaite(SDL_Surface *psurface,perso p)
 
     for(i=0; i<8; i++)
     {
-        color=getpixel(psurface,tabx[i],taby[i]);
-        if((color.r==0) && (color.b==0) && (color.g==0))
+        //color=getpixel(psurface,tabx[i],taby[i]);
+        if(color.r==color1.r && color.b==color1.b && color.g==color1.g)
         {
-            return i;
 
+
+            return i;
         }
+
     }
     return 10;
 
 }
 
-void collision(SDL_Surface *psurface,perso *p)
-{
-    int i;
-    i=collisionparfaite(psurface,*p);
 
-    switch (i)
-    {
-    case 0 :
-        p->rect.y=p->rect.y+10;
-        break;
-    case 1 :
-        p->rect.y=p->rect.y+10;
-        break;
-    case 2 :
-        p->rect.y=p->rect.y+10;
-        break;
-    case 3 :
-        p->rect.x=p->rect.x+10;
-        break;
-    case 4 :
-        p->rect.y=p->rect.y-10;
-        break;
-    case 5 :
-        p->rect.y=p->rect.y-10;
-        break;
-    case 6 :
-        p->rect.y=p->rect.y-10;
-        break;
-    case 7 :
-        p->rect.x=p->rect.x-10;
-        break;
-
-
-    }
-}
 

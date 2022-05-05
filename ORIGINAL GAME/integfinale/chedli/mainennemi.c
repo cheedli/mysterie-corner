@@ -41,7 +41,7 @@ void main()
     back.pos.y = 0;
     initEnnemi(&e);
 //      ***************************BOUCLE***************************
-    e.level=3;
+    e.level=1;
     e.etat=0;
     while (cont)
     {
