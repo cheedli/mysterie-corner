@@ -71,11 +71,6 @@ while(SDL_PollEvent(&event))//bch ychouf l event l dkhal
 				I.jump=1;
 
 			break;
-
-
-
-
-
 			}
 		break;
 		case SDL_KEYUP:
@@ -103,14 +98,14 @@ while(SDL_PollEvent(&event))//bch ychouf l event l dkhal
 	}
 
 
- if (I.right==1)
+ if (I.left==1)
 {
 	p.direction=2;
 	p.acceleration+=0.05;
 	p.vitesse=5;
 
 }
-else if (I.left==1 )
+else if (I.right==1 )
 {
 	p.direction=1;
 	p.acceleration+=0.05;
@@ -128,7 +123,7 @@ SDL_Delay(4);//yekber lwakt dt
 dt=SDL_GetTicks() - t0;
 movePerso(&p,dt);
 
-	p.acceleration-=0.02;// k nsayb l bouton
+	p.acceleration-=0.025;// k nsayb l bouton
 
 if (p.acceleration<=0)
 {
