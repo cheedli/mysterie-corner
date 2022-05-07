@@ -58,7 +58,7 @@ void InitEnigme(enigme *e, char *nomfichier)
 	    fclose(F);
 
 
-	printf("%s \n %d \n",e->question,e->reponsejuste);
+
 
     e->quest= TTF_RenderText_Solid (police,e->question,couleurNoire);
     e->posQuestion.x=300;

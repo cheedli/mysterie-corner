@@ -312,6 +312,7 @@ void menu()
     SDL_Surface *screen;
     SDL_Event event;
     initialiser_perso (&per);
+                per.rect.y-=70;
     //affectation de l'ecran en la variable : screen
     screen = SDL_SetVideoMode(1300, 782, 32,SDL_HWSURFACE|SDL_SWSURFACE|SDL_RESIZABLE|SDL_DOUBLEBUF);
     if ( !screen )
@@ -364,8 +365,9 @@ void menu()
             
 if(d)
 {
-afficher_perso (per,screen);
-            animation (&per,in);
+
+
+            afficher_perso (per,screen);
 d=clavier (chedli,screen,police);
 
 }
@@ -418,6 +420,8 @@ solo=0;
         {
             i++;
             oo=0;
+
+                        animation (&per,in);
         }
         SDL_PollEvent(&event);
         switch(event.type)

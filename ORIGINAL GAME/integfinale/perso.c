@@ -56,7 +56,7 @@ void animation (perso *p,Input i)
         p->pos_sprite[3].x =0;
     }
     else p->pos_sprite[3].x +=228;
-    if(i.jump==0 && i.right==0 &&i.left==0 && p->pos_sprite[0].x <1750)
+    if(i.jump==0 && i.right==0 && i.left==0 && p->pos_sprite[0].x <1750)
         p->pos_sprite[0].x +=250;
     else
         p->pos_sprite[0].x =0;
