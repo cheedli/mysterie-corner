@@ -38,10 +38,10 @@ typedef struct Input
 
 } Input;
 
-void initialiser_perso (perso *p);
+void initialiser_perso (perso *p,int choix);
 void afficher_perso (perso *p,SDL_Surface *screen);
 
-void animation (perso *p);
+void animation (perso *p,int choix);
 void movePerso(perso *p,Uint32 dt);
 
 

@@ -4,5 +4,4 @@ main.o: main.c
 	gcc -c main.c -g
 Fonctions.o: Fonctions.c
 	gcc -c Fonctions.c -g
-Fonctions.o: Fonctions.c
-	gcc -c Fonctions.c -g
+

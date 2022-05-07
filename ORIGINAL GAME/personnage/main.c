@@ -23,7 +23,7 @@ screen=SDL_SetVideoMode (1000,800,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 SDL_WM_SetCaption("personnage\t1",NULL);//titre de la fenetre
 
 
-
+int choix=2;
 Input I;
 perso p;
 
@@ -31,7 +31,7 @@ SDL_Event event;
 SDL_Surface *back;
 
 
-initialiser_perso (&p);
+initialiser_perso (&p,choix);
 initialiser_input (&I);
 
 uint32_t t0 , dt;//type c'est uint
@@ -88,7 +88,7 @@ while(SDL_PollEvent(&event))//bch ychouf l event l dkhal
 			break;
 			case SDLK_LEFT :
 				I.left=0;
-				p.direction=3;
+				p.direction=0;
 				p.vitesse=0;
       		break;
 
@@ -146,13 +146,13 @@ p.vitesse_V+=GRAVITY;//vitesse verticale naks 10 tjrs
  if(p.rect.y >= 300)
  	 {
  		 p.rect.y= 300;//wsel ground
- 		 p.vitesse_V = 0;//tzidha 10 perso habt khatr wsl
+ 		 p.vitesse_V = 10;//tzidha 10 perso habt khatr wsl
 }
 
 
 
 
-	animation(&p);
+	animation(&p,choix);
 	SDL_BlitSurface(back, NULL, screen, NULL);
 	afficher_perso (&p,screen);
 

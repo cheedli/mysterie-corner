@@ -7,11 +7,13 @@
 
 
 
-void initialiser_perso (perso *p)
+void initialiser_perso (perso *p,int choix)
+{
+if(choix==1)
 {
 p->personnage=IMG_Load("spr.png");
 p->rect.x=0;//perso
-p->rect.y=100;
+p->rect.y=300;
 p->direction=0;
 p->rect.w=48;
 p->rect.h=48;
@@ -23,29 +25,25 @@ p->pos_sprite.h=69;
 p->pos_sprite.w=50;
 
 p->vitesse=0;
+p->acceleration=0;}
+else if (choix==2)
+{
+
+p->personnage=IMG_Load("rayan.png");
+p->rect.x=0;//perso
+p->rect.y=300;
+p->direction=0;
+p->vitesse_V=0;
+
+p->pos_sprite.x=0;//mtaa cadre entier
+p->pos_sprite.y=0;
+p->pos_sprite.h=230;
+p->pos_sprite.w=240;
+
+p->vitesse=0;
 p->acceleration=0;
-
-
 
 }
-
-void initialiser_perso2 (perso *p2)
-{
-p->personnage=IMG_Load("spr.png");
-p->rect.x=0;//perso
-p->rect.y=100;
-p->direction=0;
-p->rect.w=48;
-p->rect.h=48;
-p->vitesse_V=0;
-
-p->pos_sprite.x=0;//mtaa cadre entier
-p->pos_sprite.y=0;
-p->pos_sprite.h=69;
-p->pos_sprite.w=50;
-
-p->vitesse=0;
-p->acceleration=0;
 
 
 
@@ -68,13 +66,25 @@ void afficher_perso (perso *p,SDL_Surface *screen)
 
 
 
-void animation (perso *p){
-  if (p->pos_sprite.x >=150)//hya ekher taswira l hya x=150
+void animation (perso *p,int choix)
+{
+if(choix==1)
+{  
+if (p->pos_sprite.x >=150)//hya ekher taswira l hya x=150
   {
     p->pos_sprite.x =0;
   }else p->pos_sprite.x +=50;
   p->pos_sprite.y = p->direction * 69;//:hasb direction(ken dir 1) des y  kol mankadm
+} else 
+{
 
+if (p->pos_sprite.x >=960)//hya ekher taswira l hya x=150
+  {
+    p->pos_sprite.x =0;
+  }else {p->pos_sprite.x +=240;}
+  p->pos_sprite.y = p->direction *230;//:hasb direction(ken dir 1) des y  kol mankadm
+
+}
 }
 
 
