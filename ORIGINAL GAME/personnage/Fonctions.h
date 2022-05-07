@@ -1,5 +1,5 @@
-#ifndef test_H_INCLUDED
-#define test_H_INCLUDED
+#ifndef perso_H_INCLUDED
+#define perso_H_INCLUDED
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,19 +13,21 @@
 
 typedef struct perso
 {
-double vitesse[4],   acceleration;
-SDL_Surface *personnage[4];
-SDL_Rect rect;
-SDL_Rect pos_sprite[4];
 
-float vitesse_V[4];
+double vitesse,   acceleration;
+SDL_Surface *personnage;
+SDL_Rect rect;
+SDL_Rect pos_sprite;
+
+float vitesse_V;
 int direction ; 
 /*
 les directions:
 0:stable droite
-1:droite
-2:gauche
-3: jump
+1:stable gauche
+2:droite
+3:gauche
+
 */
 
 }perso;
@@ -35,16 +37,13 @@ typedef struct Input
  int left,right,jump;
 
 } Input;
-void initialiser_walk (perso *p);
-void initialiser_wl (perso *p);
-void initialiser_jump (perso *p);
+
 void initialiser_perso (perso *p);
-void afficher_perso (perso p,SDL_Surface *screen);
+void afficher_perso (perso *p,SDL_Surface *screen);
 
-void animation (perso *p,Input i);
-void movePerso(perso *p,Uint32 dt,Input i);
+void animation (perso *p);
+void movePerso(perso *p,Uint32 dt);
 
-// acceleration
 
 
 void initialiser_input (Input *I);
@@ -53,4 +52,3 @@ void saut(perso *p);
 
 
  #endif
-
