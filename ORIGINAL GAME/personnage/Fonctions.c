@@ -29,6 +29,28 @@ p->acceleration=0;
 
 }
 
+void initialiser_perso2 (perso *p2)
+{
+p->personnage=IMG_Load("spr.png");
+p->rect.x=0;//perso
+p->rect.y=100;
+p->direction=0;
+p->rect.w=48;
+p->rect.h=48;
+p->vitesse_V=0;
+
+p->pos_sprite.x=0;//mtaa cadre entier
+p->pos_sprite.y=0;
+p->pos_sprite.h=69;
+p->pos_sprite.w=50;
+
+p->vitesse=0;
+p->acceleration=0;
+
+
+
+}
+
 
 
 
