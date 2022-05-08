@@ -71,6 +71,9 @@ while(SDL_PollEvent(&event))//bch ychouf l event l dkhal
 				I.jump=1;
 
 			break;
+			case SDLK_SPACE:
+				I.hit=1;
+			break;
 			}
 		break;
 		case SDL_KEYUP:
@@ -90,6 +93,10 @@ while(SDL_PollEvent(&event))//bch ychouf l event l dkhal
 			case SDLK_UP :
 				I.jump=0;
 
+			break;
+			case SDLK_SPACE:
+				I.hit=0;
+				p.direction=0;
 			break;
 
 			}
@@ -118,6 +125,16 @@ if (I.jump==1)
 
 	saut(&p);
 }
+if(I.hit==1&&I.left==1)
+{
+p.direction=4;
+}
+if (I.hit==1&&I.right==1)
+{
+p.direction=3;}
+if(I.hit==1&&I.left==0)
+{p.direction=3;}
+
 
 SDL_Delay(4);//yekber lwakt dt
 dt=SDL_GetTicks() - t0;

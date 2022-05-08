@@ -96,7 +96,7 @@ void movePerso(perso *p,Uint32 dt) //(diff de temps kadeh aandha bdet boucle hat
 {
     double dx;// vitesse
     dx= 0.5 * dt * dt * p->acceleration + dt*p->vitesse;
-    if ((p->direction==0) || (p->direction==1)) //k yabda f a droite donc 2
+    if ((p->direction==0) || (p->direction==1)||(p->direction==3)) //k yabda f a droite donc 2
     {
         p->rect.x += dx;
     }

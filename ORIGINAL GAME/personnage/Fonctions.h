@@ -34,7 +34,7 @@ les directions:
 
 typedef struct Input
 {
- int left,right,jump;
+ int left,right,jump,hit;
 
 } Input;
 
