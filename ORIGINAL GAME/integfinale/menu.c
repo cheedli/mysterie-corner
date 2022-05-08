@@ -303,7 +303,8 @@ void menu()
 
     //declaration des variables
     perso per;
-    Input in;
+    Input I;
+        initialiser_input (&I);
     	TTF_Font *police = NULL;
     	police = TTF_OpenFont("minimap/avocado.ttf", 30);
     int  verif=1,done=1,solo=0,multi=0,odone=0,o=0,p=0,q=0,i=0,oo=0,s=4,ef=4,ss,c=0,d=1, sso=0,ssc=0,mmu=0,y=0,n=0,new=0,qdone=0,pdone=0,sdone=0,load=0,ndone=0,newdone=0,mus=0,effect=0,fleche=1,let=0,solodone=0;
@@ -311,7 +312,8 @@ void menu()
     text t;
     SDL_Surface *screen;
     SDL_Event event;
-    initialiser_perso (&per);
+    int choix=2;
+    initialiser_perso (&per,choix);
                 per.rect.y-=70;
     //affectation de l'ecran en la variable : screen
     screen = SDL_SetVideoMode(1300, 782, 32,SDL_HWSURFACE|SDL_SWSURFACE|SDL_RESIZABLE|SDL_DOUBLEBUF);
@@ -367,7 +369,7 @@ if(d)
 {
 
 
-            afficher_perso (per,screen);
+            afficher_perso (&per,screen);
 d=clavier (chedli,screen,police);
 
 }
@@ -421,7 +423,7 @@ solo=0;
             i++;
             oo=0;
 
-                        animation (&per,in);
+        animation(&per,choix);
         }
         SDL_PollEvent(&event);
         switch(event.type)
