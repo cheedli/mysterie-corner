@@ -63,18 +63,18 @@ void initBack(background *b)
     b->camera2.h = 1000;
 
     b->compteur=-1;
+    b->level=0;
 
 }
 
 void aficherBack(SDL_Surface *screen,background *b)
 {
-//cette fonction va afficher l background o l masque (l masque b m3na ekher bch ytkhaba wra background ha9aneya o l colision kn bch tol9t loun l ak7el bch traj3 lil main o scrolling ye9f)
 
     SDL_BlitSurface(b->masque[b->level], &b->camera1, screen, &b->positionbackground); /// blite de 1ere background
     SDL_BlitSurface(b->image[b->level], &b->camera1, screen, &b->positionbackground); /// blite de 1ere background
 
 
-//idha l player khter multiplayer fyl menu mt3k l ecran bch yt9sam sur 2
+
     if(b->partage==1)
     {
         SDL_BlitSurface(b->masque[b->level], &b->camera2, screen, &b->positionback_partage); /// blite de 1ere background
@@ -94,16 +94,16 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
 
     if (M.right == 1 )
     {
-        if (b->camera1.x < 5000)
+        if (b->camera1.x < 8000)
         {
-            b->camera1.x += 10;
+            b->camera1.x += 30;
         }
     }
     if (M.left == 1)
     {
         if (b->camera1.x > 0)
         {
-            b->camera1.x -= 10;
+            b->camera1.x -= 30;
         }
     }
     //btbi3a manansawouch si joueur khtar l option t3 multipayer lezm yssir scrolling bin les 2 ecran o kol whda tescrolli wahdha so 2eme joueur bch yt7ark bl d et qo l 1er joueur bch yt7ark bl les fleches
@@ -115,7 +115,7 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
         {
             if (b->camera2.x < 2100)
             {
-                b->camera2.x += 10;
+                b->camera2.x += 20;
             }
         }
 
@@ -123,7 +123,7 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
         {
             if (b->camera2.x > 0)
             {
-                b->camera2.x -= 10;
+                b->camera2.x -= 20;
             }
         }
     }

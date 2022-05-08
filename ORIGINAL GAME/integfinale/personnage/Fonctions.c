@@ -1,4 +1,4 @@
-#include "perso.h"
+#include "Fonctions.h"
 
 
 
@@ -9,11 +9,9 @@
 
 void initialiser_perso (perso *p,int choix)
 {
-
-
     if(choix==1)
     {
-        p->personnage=IMG_Load("personnage/spr.png");
+        p->personnage=IMG_Load("spr.png");
         p->rect.x=0;//perso
         p->rect.y=300;
         p->direction=0;
@@ -32,9 +30,9 @@ void initialiser_perso (perso *p,int choix)
     else if (choix==2)
     {
 
-        p->personnage=IMG_Load("personnage/ray.png");
+        p->personnage=IMG_Load("ray.png");
         p->rect.x=0;//perso
-        p->rect.y=570;
+        p->rect.y=300;
         p->direction=0;
         p->vitesse_V=0;
 
@@ -109,9 +107,9 @@ void movePerso(perso *p,Uint32 dt) //(diff de temps kadeh aandha bdet boucle hat
 
 
 
-void saut (perso *p,int irtifa3)
+void saut (perso *p)
 {
-    if(p->rect.y==irtifa3)//collision with ground=300 sinon maynajmch
+    if(p->rect.y==300)//collision with ground=300 sinon maynajmch
         p->vitesse_V = -60;// verticale (yatlaa fouk)
 }
 

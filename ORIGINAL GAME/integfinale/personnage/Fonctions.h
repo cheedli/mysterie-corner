@@ -48,7 +48,7 @@ void movePerso(perso *p,Uint32 dt);
 
 void initialiser_input (Input *I);
 
-void saut (perso *p,int irtifa3);
+void saut(perso *p);
 
 
  #endif
