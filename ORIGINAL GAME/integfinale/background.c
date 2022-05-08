@@ -94,16 +94,16 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
 
     if (M.right == 1 )
     {
-        if (b->camera1.x < 5000)
+        if (b->camera1.x < 8000)
         {
-            b->camera1.x += 10;
+            b->camera1.x += 30;
         }
     }
     if (M.left == 1)
     {
         if (b->camera1.x > 0)
         {
-            b->camera1.x -= 10;
+            b->camera1.x -= 30;
         }
     }
     //btbi3a manansawouch si joueur khtar l option t3 multipayer lezm yssir scrolling bin les 2 ecran o kol whda tescrolli wahdha so 2eme joueur bch yt7ark bl d et qo l 1er joueur bch yt7ark bl les fleches
@@ -115,7 +115,7 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
         {
             if (b->camera2.x < 2100)
             {
-                b->camera2.x += 10;
+                b->camera2.x += 20;
             }
         }
 
@@ -123,7 +123,7 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
         {
             if (b->camera2.x > 0)
             {
-                b->camera2.x -= 10;
+                b->camera2.x -= 20;
             }
         }
     }

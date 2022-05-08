@@ -272,7 +272,7 @@ void animerEnnemi( Ennemi * e)
 * @param e is the ennemi
 * @return nothing
 */
-void deplacerIA(Ennemi *e)
+void deplacer(Ennemi *e)
 {
     switch(e->level)
     {
@@ -361,5 +361,19 @@ int collisionBox(SDL_Rect a, SDL_Rect b)
         return 0;
     else
         return 1;
+}
+
+void updateEnnemi (Ennemi* E, SDL_Rect posHero )
+{
+printf("%daaa\n",E->pos[E->level].x);
+printf("%d\n",E->pos[E->level].x-posHero.x);
+if(250>=(E->pos[E->level].x-posHero.x))
+E->etat=1;
+
+else
+if(220>=E->pos[E->level].x-posHero.x>205)
+E->etat=1;
+
+
 }
 

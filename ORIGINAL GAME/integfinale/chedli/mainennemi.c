@@ -48,9 +48,10 @@ void main()
     SDL_PollEvent(&event);
         SDL_BlitSurface(back.img,NULL,screen,&back.pos);
         SDL_BlitSurface(colision.img,NULL,screen,&colision.pos);
+                animerEnnemi(&e);
         afficherEnnemi(e,screen);
-        animerEnnemi(&e);
-        deplacerIA(&e);
+ 	updateEnnemi (&e, colision.pos);
+        deplacer(&e);
         SDL_Flip(screen);
 
         if ((event.type == SDL_QUIT)||(event.key.keysym.sym == SDLK_ESCAPE))

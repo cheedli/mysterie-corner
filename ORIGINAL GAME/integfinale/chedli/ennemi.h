@@ -61,6 +61,7 @@ void animerEnnemi( Ennemi * e);
 void deplacer( Ennemi * e);
 int collisionBox(SDL_Rect a, SDL_Rect b);
 void deplacerIA( Ennemi * e);
+void updateEnnemi (Ennemi* E, SDL_Rect posHero );
 
 
 #endif
