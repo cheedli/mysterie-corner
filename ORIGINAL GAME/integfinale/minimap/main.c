@@ -3,6 +3,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <string.h>
+#include <time.h>
 #include "minimap.h"
 int main()
 {
@@ -34,7 +35,6 @@ int main()
     score s;
     initialiser_score(1000,&s);
     clavier(nom);
-
     initialiser_temps(&t);
     valeur_score=1000;
     while(done)

@@ -18,6 +18,7 @@ void init_map (minimap *m)
     m->positionminijoueur.x =330;
     m->positionminijoueur.y =20;
 }
+
 //mise a jour de la position du minijoueur
 
 void MAJMinimap(SDL_Rect posJoueur,  minimap * m, SDL_Rect camera, int redimensionnement)
@@ -28,7 +29,7 @@ void MAJMinimap(SDL_Rect posJoueur,  minimap * m, SDL_Rect camera, int redimensi
     posJoueurABS.x = posJoueur.x + camera.x;
     posJoueurABS.y = posJoueur.y + camera.y;
     m->positionminijoueur.x=(posJoueurABS.x * redimensionnement/100)+330;
-    m->positionminijoueur.y=(posJoueurABS.y * redimensionnement/100)+5;
+    m->positionminijoueur.y=(posJoueurABS.y * redimensionnement/100)-5;
 }
 //affichage du minimap et minijoueur
 
@@ -48,7 +49,8 @@ void initialiser_temps(temps *t)
     t->position.x=30;
     t->position.y=30;
     t->police = NULL;
-    t->police = TTF_OpenFont("minimap/angelina.TTF", 50);
+    t->police = TTF_OpenFont("angelina.TTF", 50);
+   
     strcpy( t->entree,"");
     (t->secondesEcoulees)=0;
     time(&(t->t1));
@@ -90,7 +92,7 @@ void load (int valeur_score,char nom[])
     int m=-1;
     char mm[30]="";
     FILE* saveF = NULL;
-    saveF = fopen("minimap/sauvegarde.txt","r");
+    saveF = fopen("sauvegarde.txt","r");
 
     if(saveF != NULL)
     {
@@ -115,29 +117,24 @@ void load (int valeur_score,char nom[])
 
 void initialiser_score (int valeur_score, score *s )
 {
-    SDL_Surface *texte1=NULL;
-    SDL_Surface *number1=NULL;
-    TTF_Font *police=NULL;
-
-    s->police = TTF_OpenFont("minimap/avocado.ttf", 30);
-
+	s->police=NULL;
+    s->police = TTF_OpenFont("avocado.ttf", 30);
     SDL_Color couleur= {0,0,0};
-
-
-    s->position_number.x=1220;
-    s->position_number.y=25;
-
-    s->position_texte.x=1100;
-    s->position_texte.y=25;
+   
     char texte[20];
     strcpy(texte,"Score :");
     char number[20];
     sprintf(number, "%d ", valeur_score);
     s->texte1= TTF_RenderText_Blended(s->police,texte,couleur);
     s->number1= TTF_RenderText_Blended(s->police,number,couleur);
-    TTF_CloseFont(police);
+     s->position_number.x=1220;
+    s->position_number.y=25;
 
-}
+    s->position_texte.x=1100;
+    s->position_texte.y=25;
+
+
+} 
 
 // AFFICHAGE
 void afficher_score(score *s,SDL_Surface *screen,int valeur_score)

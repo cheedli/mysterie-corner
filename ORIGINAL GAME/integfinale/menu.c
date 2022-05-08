@@ -298,7 +298,7 @@ void freeText(text A)
 
 void menu()
 {
-    TTF_Init();
+
     SDL_Init ( SDL_INIT_VIDEO );
 
     //declaration des variables
