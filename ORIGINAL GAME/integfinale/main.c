@@ -72,7 +72,7 @@ int main(int argc, char** argv)
 
 
 
-    //animer (&e);
+    animer (&e);
 
 
 
