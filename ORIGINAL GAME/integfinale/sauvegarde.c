@@ -13,7 +13,7 @@ int load_data(FILE* fichier,SDL_Rect* pos_perso,SDL_Rect* camera,int* score,int*
 {
 	int carac,caractereLu=1 ;
 	int ligne =1;
-	fichier = fopen("savefile","r");
+	fichier = fopen("save.txt","r");
 	char data[6] = {0};
 	int temp=0;
 	if ( fichier != NULL )
@@ -86,7 +86,7 @@ int load_data(FILE* fichier,SDL_Rect* pos_perso,SDL_Rect* camera,int* score,int*
 int save_data(FILE* fichier,SDL_Rect* pos_perso,SDL_Rect* camera,int* score,int* vie)
 {
 	
-	fichier = fopen("savefile","w");
+	fichier = fopen("save.txt","w");
 
 	char data[6] = {0};
 	int temp=0;
@@ -145,11 +145,3 @@ int save_data(FILE* fichier,SDL_Rect* pos_perso,SDL_Rect* camera,int* score,int*
 
 
 }
-
-
-
-
-
-
-
-

@@ -23,4 +23,4 @@ void animer2 (enigme2 *e);
 
 
 void initexte(text *t);
-void displayTexte(text t,SDL_Surface *screen,char cc[30]);
+void displayTexte2(text t,SDL_Surface *screen,char cc[30]);

@@ -94,7 +94,7 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
 
     if (M.right == 1 )
     {
-        if (b->camera1.x < 8000)
+        if (b->camera1.x < 8700)
         {
             b->camera1.x += 30;
         }
@@ -113,7 +113,7 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
 
         if (M.d == 1)
         {
-            if (b->camera2.x < 2100)
+            if (b->camera2.x < 8700)
             {
                 b->camera2.x += 20;
             }

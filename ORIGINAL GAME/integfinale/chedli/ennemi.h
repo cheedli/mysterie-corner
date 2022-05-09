@@ -25,8 +25,8 @@
 
 typedef struct 
 {
-		SDL_Rect posg[2]/*!< POSITION */,posa[3]/*!< POSITION */,posl[2]/*!< POSITION */,posc[4];/*!< POSITION */
-			SDL_Surface *g[2],/*!< IMAGE */*a[3],/*!< IMAGE */*l[2],/*!< IMAGE */*c[4];/*!< IMAGE */
+		SDL_Rect posg[3]/*!< POSITION */,posa[4]/*!< POSITION */,posl[3]/*!< POSITION */,posc[4];/*!< POSITION */
+			SDL_Surface *g[3],/*!< IMAGE */*a[4],/*!< IMAGE */*l[3],/*!< IMAGE */*c[4];/*!< IMAGE */
 }ennemi;
 
 /** 

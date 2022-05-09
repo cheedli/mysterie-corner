@@ -118,7 +118,7 @@ SDL_Rect p;
 
     SDL_Event event;
 
-    screen=SDL_SetVideoMode(1380,700,32,SDL_HWSURFACE  );
+    screen=SDL_SetVideoMode(1300,780,32,SDL_HWSURFACE  );
     if(!screen)
     {
         printf("Unable de set 600x300 video: %s\n", SDL_GetError());
@@ -247,14 +247,7 @@ rep=0;
             {
                 done1= 0;
             }
-if(rep==e->reponsejuste){
-       afficherbutton(winorlose[0], screen);
-      }
-else {
-       SDL_BlitSurface(b,NULL,screen,&bpos);
-        afficherbutton(winorlose[1], screen);
-}
-                   SDL_Flip(screen);
+
 }}
 
 void inithorloge(SDL_Surface *horloge[])

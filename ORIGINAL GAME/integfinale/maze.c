@@ -111,7 +111,7 @@ printf("%d",e->reponse);
     SDL_BlitSurface (e.maze[2],NULL,screen,&e.posmaze[2]);
 
 }
-/*
+
 void animer2 (enigme2 *e)
 {
     TTF_Init();
@@ -136,7 +136,7 @@ void animer2 (enigme2 *e)
     {
         printf("error2 : %s\n",SDL_GetError());
     }
-    InitEnigme(e,"enigme.txt" );
+    InitEnigme2(e,"enigme.txt" );
 
     initexte(&tt);
 
@@ -151,9 +151,9 @@ void animer2 (enigme2 *e)
 
         sprintf(cc, ":0%d", t);
         
-       afficherEnigme(*e, screen);
+       afficherEnigme2(*e, screen);
           SDL_BlitSurface (e->timer[t],NULL,screen,&e->postimer);
-        displayText(tt,screen,cc);
+        displayTexte2(tt,screen,cc);
         
         end=clock();
         t=(end-start)/CLOCKS_PER_SEC;
@@ -225,7 +225,7 @@ SDL_PollEvent(&event);
 }
 printf("\n%d\n",e->r[choix-1]);
         e->reponsejuste=e->r[choix-1];
-        }*/
+        }
 
 void initexte(text *A)
 {
@@ -240,7 +240,7 @@ void initexte(text *A)
 }
 
 
-void displayTexte(text t,SDL_Surface *screen,char cc[30])
+void displayTexte2(text t,SDL_Surface *screen,char cc[30])
 {
     t.surfaceTexte = TTF_RenderText_Solid(t.font, cc, t.textColor );
     SDL_BlitSurface(t.surfaceTexte, NULL, screen,&t.position);

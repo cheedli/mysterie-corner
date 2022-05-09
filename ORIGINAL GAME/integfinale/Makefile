@@ -1,5 +1,5 @@
-Game: main.o menu.o enigme.o perso.o background.o maze.o  ennemi.o minimap.o clavier.o
-	gcc main.o menu.o enigme.o perso.o minimap.o clavier.o background.o maze.o ennemi.o -o Game -lSDL -lSDL_image -g -lSDL_ttf -lSDL_mixer 
+Game: main.o menu.o enigme.o perso.o background.o maze.o  ennemi.o minimap.o clavier.o sauvegarde.o
+	gcc main.o menu.o enigme.o perso.o minimap.o clavier.o background.o maze.o sauvegarde.o ennemi.o -o Game -lSDL -lSDL_image -g -lSDL_ttf -lSDL_mixer 
 main.o: main.c
 	gcc -c main.c -g
 menu.o: menu.c
@@ -18,3 +18,5 @@ minimap.o: minimap.c
 	gcc -c minimap.c -g
 clavier.o:clavier.c 
 	gcc -c clavier.c -g
+sauvegarde.o:sauvegarde.c 
+	gcc -c sauvegarde.c -g

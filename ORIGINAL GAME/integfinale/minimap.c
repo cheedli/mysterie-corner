@@ -13,7 +13,7 @@ void init_map (minimap *m)
 {
     m -> map = IMG_Load("minimap/n2.png");
     m-> minijoueur = IMG_Load("minimap/persomini.png");
-    m->positionmap.x =330;
+    m->positionmap.x =300;
     m->positionmap.y =20;
     m->positionminijoueur.x =330;
     m->positionminijoueur.y =20;
@@ -76,7 +76,7 @@ void afficher_temps(temps *t,SDL_Surface *ecran)
 void save (int valeur_score,char nom[])
 {
     FILE* saveF = NULL;
-    saveF = fopen("minimap/sauvegarde.txt","a+");
+    saveF = fopen("sauvegarde.txt","a+");
 
     if(saveF != NULL)
     {

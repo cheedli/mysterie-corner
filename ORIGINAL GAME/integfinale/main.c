@@ -5,20 +5,22 @@
 #include "perso.h"
 #include "background.h"
 #include "ennemi.h"
+#include "sauvegarde.h"
 
 
 #define GRAVITY 10// lzm haja tnaks f vitesse verticale bch ynajm ynagz
 int main(int argc, char** argv)
-{
+{ 
     TTF_Init();
     temps t;
     SDL_Rect posjoueur;
     posjoueur.x=70;
     enigme2  maze;
     enigme enigmetxt;
-    Ennemi monstre;
+    Ennemi e;
     minimap m;
     perso p,persoo ;
+    FILE* f;
     background b;
     uint32_t t0, dt; //type c'est uint
     bool running=true;
@@ -28,6 +30,10 @@ int main(int argc, char** argv)
     image fb0;
     int choix=2;
     int  valeur_score=1000;
+    int i=0,ched=0,ed=0,vie=3;
+    
+    e.level=1;
+    e.etat=0;
 
     score s;
 
@@ -48,49 +54,33 @@ int main(int argc, char** argv)
     initBack(&b);
     InitEnigme(&enigmetxt,"enigme1.txt");
     InitEnigme2(&maze, "enigme.txt");
-    initEnnemi(&monstre);
+    initEnnemi(&e);
     init_map (&m);
     initialiser_perso (&p,choix);
     initialiser_input (&I);
     initialiser_score(1000,&s);
     initialiser_temps(&t);
+
     
     char nom[30]="";
 
     fb0.img = IMG_Load("b0.png");
 
-
- printf("Unable to set video: %s\n", SDL_GetError());
-
+//b.partage=1;
 
 
 
 
 
-
-
-
-   
-
+    //animer (&e);
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+while(!(maze.reponsejuste))
+{
+running=true;
+    initialiser_input (&I);
     while(running)
     {
         //persoooooooooo
@@ -130,7 +120,7 @@ int main(int argc, char** argv)
                 break;
             case SDLK_UP :
                 I.jump=1;
-                printf("%d\t",posjoueur.x);
+
                 if(posjoueur.x>=69 && posjoueur.x<=110)
                     running=false;
 
@@ -193,7 +183,7 @@ int main(int argc, char** argv)
 
         if (I.jump==1)
         {
-            printf("wa");
+
             saut(&p,570);
         }
         if(I.hit==1&&I.left==1)
@@ -237,6 +227,12 @@ int main(int argc, char** argv)
 
 
     }
+    animer2 (&maze);
+    }
+    
+    
+    
+    
     running=true;
     p.rect.y=500;
 
@@ -247,11 +243,8 @@ int main(int argc, char** argv)
 
     while(running)
     {
-
+    save_data(f,&p.rect,&b.camera1,&valeur_score,&vie);
         SDL_PollEvent(&event);//bch ychouf l event l dkhal
-
-
-
         switch(event.type)
         {
         case SDL_QUIT:
@@ -264,7 +257,6 @@ int main(int argc, char** argv)
 
             case SDLK_LEFT :
                 I.left=1;
-
 
                 break;
 
@@ -369,12 +361,44 @@ int main(int argc, char** argv)
         }
 
 
+        aficherBack(screen, &b);/// appel fonction affichage back 1
+
+        if (( ed==1)&&(collisionBox( e.pos[e.level],p.rect)!=1))
+        {
+
+            e.etat=0;
+            ed=0;
+        }
+        if(ched==0)
+        {
+            animerEnnemi(&e);
+            afficherEnnemi(e,screen);
+
+            deplacer(&e);
+            deplacerIA(&e);
+
+
+            if (collisionBox( e.pos[e.level],p.rect))
+            {
+                e.etat=2;
+                ed=1;
+            }
+            if(e.etat!=2)
+                updateEnnemi ( &e,p.rect );
+
+        }
+
+        if (I.hit)
+        {
+                ched=1;
+                e.etat=3;
+        }
 
 
         
         animation(&p,choix);
         //movePerso(&p,dt);
-        aficherBack(screen, &b);/// appel fonction affichage back 1
+
          afficher_temps(&t,screen);
        afficher_score(&s,screen,valeur_score);
         afficher_perso (&p,screen);
@@ -415,11 +439,13 @@ int main(int argc, char** argv)
                     M.right = 1;
                     persoo.rect.x+=10;
                     p.rect.x+=10;
+                   if(e.pos[e.level].x-p.rect.x>100)
+                    e.pos[e.level].x-=30;
                     break;
                 case SDLK_UP:
                     persoo.rect.y-=5;
 
-
+ 
                     break;
                 case SDLK_DOWN:
                     persoo.rect.y+=5;
@@ -431,6 +457,8 @@ int main(int argc, char** argv)
                     M.left = 1;
                     persoo.rect.x-=10;
                     p.rect.x-=10;
+                    if(e.pos[e.level].x-p.rect.x>100)
+                    e.pos[e.level].x-=30;
 
                     break;
                 }
