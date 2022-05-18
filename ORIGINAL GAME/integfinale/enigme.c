@@ -243,10 +243,8 @@ rep=0;
     }
 
             SDL_PollEvent(&event);
-    if(event.key.keysym.sym == SDLK_ESCAPE)
-            {
+   
                 done1= 0;
-            }
 
 }}
 

@@ -217,7 +217,7 @@ void animerEnnemi( Ennemi * e)
                 e->en.posa[e->etat].x +=  e->en.posa[e->etat].w;
             }
 
-            SDL_Delay(400);
+
 
             break;
 
@@ -235,7 +235,7 @@ void animerEnnemi( Ennemi * e)
                 e->en.posl[e->etat].x =0;
 
             }
-            SDL_Delay(230);
+
 
             break;
 
@@ -247,7 +247,7 @@ void animerEnnemi( Ennemi * e)
                 e->en.posl[e->etat].x =0;
 
             }
-            SDL_Delay(230);
+
 
             break;
         case 2:
@@ -258,7 +258,7 @@ void animerEnnemi( Ennemi * e)
                 e->en.posl[e->etat].x =0;
 
             }
-            SDL_Delay(50);
+
 
             break;
 
@@ -286,7 +286,7 @@ void animerEnnemi( Ennemi * e)
                 e->en.posc[e->etat].x =0;
 
             }
-            SDL_Delay(230);
+
             break ;
 
         case 2:
@@ -301,7 +301,7 @@ void animerEnnemi( Ennemi * e)
 
             }
 
-            SDL_Delay(300);
+
 
             break;
 

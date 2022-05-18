@@ -114,7 +114,7 @@ printf("%d",e->reponse);
 
 void animer2 (enigme2 *e)
 {
-    TTF_Init();
+    
 //      *************************INITIALISATION*************************
     SDL_Surface *screen ;
     SDL_Event event;
@@ -126,10 +126,7 @@ void animer2 (enigme2 *e)
     text tt;
     time_t start,end;
     start=clock();
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
-    {
-        printf("Unable to initialisation SDL : %s\n",SDL_GetError());
-    }
+   
     SDL_WM_SetCaption("ENIGME",NULL);
     screen = SDL_SetVideoMode(1300,780,32,SDL_HWSURFACE | SDL_DOUBLEBUF);
     if (screen == NULL)

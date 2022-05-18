@@ -44,7 +44,7 @@ int main()
     persoo.pos_perso.y =500;
 
     b.level=0;
-//b.partage=1;
+b.partage=1;
 
 ///////////////////////////////////////////////// evenement////////////////////////////////////////
     SDL_Event event;

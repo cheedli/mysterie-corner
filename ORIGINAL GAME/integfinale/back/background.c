@@ -11,7 +11,7 @@ void initBack(background *b)
 //initialisation mta3 les image ly bch nest7a9ohom ly houma 3 background o leur masque(l masque bch nest7a9ouh lil colision baadika)
 
     b->image[0] = IMG_Load("n2.png");
-    b->image[1] = IMG_Load("1.png");
+    b->image[1] = IMG_Load("g.png");
     b->image[2] = IMG_Load("2.png");
 
     b->masque[0]=IMG_Load("masquen2.png");

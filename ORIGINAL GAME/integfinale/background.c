@@ -6,13 +6,13 @@
 #include <SDL/SDL_mixer.h>
 #include "background.h"
 #include "perso.h"
-
+int n;
 void initBack(background *b)
 {
 //initialisation mta3 les image ly bch nest7a9ohom ly houma 3 background o leur masque(l masque bch nest7a9ouh lil colision baadika)
 
     b->image[0] = IMG_Load("back/n2.png");
-    b->image[1] = IMG_Load("back/1.png");
+    b->image[1] = IMG_Load("back/g.png");
     b->image[2] = IMG_Load("back/2.png");
 
     b->masque[0]=IMG_Load("back/masquen2.png");
@@ -90,11 +90,13 @@ void scrolling(background *b, SDL_Surface *screen, mouvement M)
 //il va afficher tasswira ta3 l assfoura(najmou nhotou ay tasswira theb aleha c'est un exemple)
     SDL_BlitSurface(b->bird[b->compteur],NULL,screen,&b->positionbird);
 
-//tawa selon l movement ily bch yaamlou bch yssir scrolling ya ymchi ymin ya yssar(tnjm t9oli chbyh famch up o down hekom teb3in l personnage de plus maysirch scrolling l fou9 o louta yaani)
-
+//tawa selon l movement ily bch yaamlou bch yssir scrolling ya ymchi ymin ya yssar(tnjm t9oli chbyh famch up o down hekom teb3in l personnage de plus maysirch scrolling l fou9 o louta yaani
+if(b->level==1)
+n=6600;
+else 
     if (M.right == 1 )
     {
-        if (b->camera1.x < 8700)
+        if (b->camera1.x < 6600)
         {
             b->camera1.x += 30;
         }
@@ -149,7 +151,7 @@ void animerBackground( background * b)
     else
         b->compteur++;
     b->positionbird.x+=1;
-    SDL_Delay(50);
+
 
 }
 //l fonction hedhy mawjouda fyl atelier t3 l colision  huwa l concept t3 colision huwa il suffit l9a rectangle ak7el bch tssyr l colision o rectangle l ak7el heka yaanirahou obstacle o maynjmch yt3ada ila maybdl l position mte3ou  en conclusion l fonction getpixel  bch traj3lk l position ly feha joueur est que fyl position heky bdhet l pixel ka7la wala le

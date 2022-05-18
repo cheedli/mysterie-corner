@@ -2,6 +2,7 @@
 #include "perso.h"
 #include "enigme.h"
 #include "minimap.h"
+#include "sauvegarde.h"
 ///////////////////////////////////////////////////////////////
 
 void inp(image m[],image e[],image f[],image lettre[])
@@ -296,7 +297,7 @@ void freeText(text A)
 
 
 
-void menu()
+void menu(int *loa)
 {
 
     SDL_Init ( SDL_INIT_VIDEO );
@@ -377,6 +378,7 @@ else
 {
 sdone=0;
 solo=0;
+done=0;
 }
         }
         if((new==2 || newdone==1)&&(pdone!=0)&&(ssc!=2)&&(sdone!=1)&&solodone==0)
@@ -542,6 +544,13 @@ solo=0;
                         new=2;
                         load=2;
                         p=0;
+                        (*loa)=0;
+                    }
+                    if((load==1)&&(pdone==1))
+                    {
+                        
+                        (*loa)=1;
+                        done=0;
                     }
                 }
                 

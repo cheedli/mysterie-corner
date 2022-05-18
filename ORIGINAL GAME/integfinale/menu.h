@@ -27,6 +27,6 @@ void freeText(text A);
 void displayText(text t,SDL_Surface *screen) ;
 void initback(image back[]);
 
-void menu();
+void menu(int *loadgame);
 
 #endif

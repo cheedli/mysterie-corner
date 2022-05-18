@@ -28,7 +28,7 @@ void MAJMinimap(SDL_Rect posJoueur,  minimap * m, SDL_Rect camera, int redimensi
     posJoueurABS.y = 0;
     posJoueurABS.x = posJoueur.x + camera.x;
     posJoueurABS.y = posJoueur.y + camera.y;
-    m->positionminijoueur.x=(posJoueurABS.x * redimensionnement/100)+330;
+    m->positionminijoueur.x=(posJoueurABS.x * redimensionnement/100)+300;
     m->positionminijoueur.y=(posJoueurABS.y * redimensionnement/100)-5;
 }
 //affichage du minimap et minijoueur

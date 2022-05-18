@@ -6,11 +6,10 @@
 #include "background.h"
 #include "ennemi.h"
 #include "sauvegarde.h"
-
-
 #define GRAVITY 10// lzm haja tnaks f vitesse verticale bch ynajm ynagz
+
 int main(int argc, char** argv)
-{ 
+{
     TTF_Init();
     temps t;
     SDL_Rect posjoueur;
@@ -26,12 +25,13 @@ int main(int argc, char** argv)
     bool running=true;
     Input I;
     mouvement M;
-    int b0=1;
+    int b0=1,n=500;
     image fb0;
     int choix=2;
     int  valeur_score=1000;
-    int i=0,ched=0,ed=0,vie=3;
-    
+    int i=0,ched=0,ed=0,vie=3,loadgame=0;
+    char nom[30]="";
+
     e.level=1;
     e.etat=0;
 
@@ -49,22 +49,23 @@ int main(int argc, char** argv)
     }
     //init tous
 
-     menu();
-     
-    initBack(&b);
-    InitEnigme(&enigmetxt,"enigme1.txt");
-    InitEnigme2(&maze, "enigme.txt");
-    initEnnemi(&e);
-    init_map (&m);
-    initialiser_perso (&p,choix);
-    initialiser_input (&I);
-    initialiser_score(1000,&s);
-    initialiser_temps(&t);
+    menu(&loadgame);
+    if(!loadgame)
+    {
+        initBack(&b);
+        InitEnigme(&enigmetxt,"enigme1.txt");
+        InitEnigme2(&maze, "enigme.txt");
+        initEnnemi(&e);
+        init_map (&m);
+        initialiser_perso (&p,choix);
+        initialiser_input (&I);
+        initialiser_score(1000,&s);
+        initialiser_temps(&t);
 
-    
-    char nom[30]="";
 
-    fb0.img = IMG_Load("b0.png");
+
+
+        fb0.img = IMG_Load("b0.png");
 
 //b.partage=1;
 
@@ -72,178 +73,194 @@ int main(int argc, char** argv)
 
 
 
-    animer (&e);
 
 
 
 
-while(!(maze.reponsejuste))
-{
-running=true;
-    initialiser_input (&I);
-    while(running)
-    {
-        //persoooooooooo
 
-        SDL_BlitSurface(fb0.img, NULL, screen, NULL); /// blite de 1ere background
-        animation(&p,choix);
-        afficher_perso (&p,screen);
-        movePerso(&p,dt);
-        SDL_Delay(100);//tstana 70 tekhou rahatha
-        t0=SDL_GetTicks();//tsjl wakt a t0
-        SDL_Flip(screen);//trefraichi l page
-        SDL_PollEvent(&event);//bch ychouf l event l dkhal
-
-
-
-        switch(event.type)
+        while(!(maze.reponsejuste))
         {
-        case SDL_QUIT:
-
-            running=false;
-            break;
-        case SDL_KEYDOWN:
-            switch (event.key.keysym.sym)
+            running=true;
+            initialiser_input (&I);
+            while(running)
             {
+                //persoooooooooo
 
-            case SDLK_LEFT :
-                I.left=1;
-                posjoueur.x-=10;
+                SDL_BlitSurface(fb0.img, NULL, screen, NULL); /// blite de 1ere background
+                animation(&p,choix);
+                afficher_perso (&p,screen);
+                movePerso(&p,dt);
+                SDL_Delay(40);//tstana 70 tekhou rahatha
+                t0=SDL_GetTicks();//tsjl wakt a t0
+                SDL_Flip(screen);//trefraichi l page
+                SDL_PollEvent(&event);//bch ychouf l event l dkhal
 
 
-                break;
 
-            case SDLK_RIGHT :
-                I.right=1;
-                posjoueur.x+=10;
+                switch(event.type)
+                {
+                case SDL_QUIT:
 
-                break;
-            case SDLK_UP :
-                I.jump=1;
-
-                if(posjoueur.x>=69 && posjoueur.x<=110)
                     running=false;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (event.key.keysym.sym)
+                    {
 
-                if(posjoueur.x>=129 && posjoueur.x<=170)
-                    printf("second door");
-                if(posjoueur.x>=220 && posjoueur.x<=260)
-                    printf("third door");
-                if(posjoueur.x>=320 && posjoueur.x<=370)
-                    printf("exit door");
-                break;
-            case SDLK_SPACE:
-                I.hit=1;
-                break;
+                    case SDLK_LEFT :
+                        I.left=1;
+                        posjoueur.x-=10;
+
+
+                        break;
+
+                    case SDLK_RIGHT :
+                        I.right=1;
+                        posjoueur.x+=10;
+
+                        break;
+                    case SDLK_UP :
+                        I.jump=1;
+               
+                        break;
+                 case SDLK_b :
+                         if(posjoueur.x>=69 && posjoueur.x<=110)
+                            running=false;
+
+                        if(posjoueur.x>=129 && posjoueur.x<=170)
+                            printf("second door");
+                        if(posjoueur.x>=220 && posjoueur.x<=260)
+                            printf("third door");
+                        if(posjoueur.x>=320 && posjoueur.x<=370)
+                            printf("exit door");
+                           break;
+                    case SDLK_SPACE:
+                        I.hit=1;
+                        break;
+                    }
+                    break;
+                case SDL_KEYUP:
+                    switch (event.key.keysym.sym)
+                    {
+                    case SDLK_RIGHT:
+                        I.right=0;
+                        p.direction=0;
+                        p.vitesse=0;
+                        break;
+                    case SDLK_LEFT :
+                        I.left=0;
+                        p.direction=0;
+                        p.vitesse=0;
+                        break;
+
+                    case SDLK_UP :
+                        I.jump=0;
+
+                        break;
+                    case SDLK_SPACE:
+                        I.hit=0;
+                        p.direction=0;
+                        break;
+
+                    }
+                    break;
+                }
+
+
+
+                if (I.left==1)
+                {
+                    p.direction=2;
+                    p.acceleration+=0.05;
+                    p.vitesse=5;
+
+                }
+                else if (I.right==1 )
+                {
+                    p.direction=1;
+                    p.acceleration+=0.05;
+                    p.vitesse=5;
+
+
+                }
+
+                if (I.jump==1)
+                {
+
+                    saut(&p,n);
+                }
+                if(I.hit==1&&I.left==1)
+                {
+                    p.direction=4;
+                }
+                if (I.hit==1&&I.right==1)
+                {
+                    p.direction=3;
+                }
+                if(I.hit==1&&I.left==0)
+                {
+                    p.direction=3;
+                }
+
+
+                SDL_Delay(4);//yekber lwakt dt
+                dt=SDL_GetTicks() - t0;
+
+
+                p.acceleration-=0.02;// k nsayb l bouton
+
+                if (p.acceleration<=0)
+                {
+                    p.acceleration=0;
+                }
+                if (p.acceleration>=0.7)
+                {
+                    p.acceleration=0.7;
+                }
+
+
+
+                p.vitesse_V+=GRAVITY;//vitesse verticale naks 10 tjrs
+                p.rect.y = n;//yzidha -60
+                if(p.rect.y >= n)
+                {
+                    p.rect.y= n;//wsel ground
+                    p.vitesse_V = 10;//tzidha 10 perso habt khatr wsl
+                }
+
+
             }
-            break;
-        case SDL_KEYUP:
-            switch (event.key.keysym.sym)
-            {
-            case SDLK_RIGHT:
-                I.right=0;
-                p.direction=0;
-                p.vitesse=0;
-                break;
-            case SDLK_LEFT :
-                I.left=0;
-                p.direction=0;
-                p.vitesse=0;
-                break;
 
-            case SDLK_UP :
-                I.jump=0;
-
-                break;
-            case SDLK_SPACE:
-                I.hit=0;
-                p.direction=0;
-                break;
-
-            }
-            break;
-        }
-
-
-
-        if (I.left==1)
-        {
-            p.direction=2;
-            p.acceleration+=0.05;
-            p.vitesse=5;
-
-        }
-        else if (I.right==1 )
-        {
-            p.direction=1;
-            p.acceleration+=0.05;
-            p.vitesse=5;
-
+            animer2 (&maze);
 
         }
 
-        if (I.jump==1)
-        {
-
-            saut(&p,570);
-        }
-        if(I.hit==1&&I.left==1)
-        {
-            p.direction=4;
-        }
-        if (I.hit==1&&I.right==1)
-        {
-            p.direction=3;
-        }
-        if(I.hit==1&&I.left==0)
-        {
-            p.direction=3;
-        }
-
-
-        SDL_Delay(4);//yekber lwakt dt
-        dt=SDL_GetTicks() - t0;
-
-
-        p.acceleration-=0.03;// k nsayb l bouton
-
-        if (p.acceleration<=0)
-        {
-            p.acceleration=0;
-        }
-        if (p.acceleration>=0.7)
-        {
-            p.acceleration=0.7;
-        }
+        initBack(&b);
+        InitEnigme(&enigmetxt,"enigme1.txt");
+        InitEnigme2(&maze, "enigme.txt");
+        initEnnemi(&e);
+        init_map (&m);
+        initialiser_perso (&p,choix);
+        initialiser_input (&I);
+        initialiser_score(1000,&s);
+        initialiser_temps(&t);
 
 
 
-        p.vitesse_V+=GRAVITY;//vitesse verticale naks 10 tjrs
-        p.rect.y += p.vitesse_V;//yzidha -60
-        if(p.rect.y >= 570)
-        {
-            p.rect.y= 570;//wsel ground
-            p.vitesse_V = 10;//tzidha 10 perso habt khatr wsl
-        }
+        running=true;
+        p.rect.y=500;
 
-
+        p.rect.x=0;
+        persoo.rect=p.rect;
     }
-    animer2 (&maze);
-    }
-    
-    
-    
-    
-    running=true;
-    p.rect.y=500;
-
-    p.rect.x=0;
-    persoo.rect=p.rect;
+    else
+        load_data(f,&p.rect,&b.camera1,&valeur_score,&vie);
 
     //FIRST LEVEL //
 
     while(running)
     {
-    save_data(f,&p.rect,&b.camera1,&valeur_score,&vie);
+        save_data(f,&p.rect,&b.camera1,&valeur_score,&vie);
         SDL_PollEvent(&event);//bch ychouf l event l dkhal
         switch(event.type)
         {
@@ -254,7 +271,14 @@ running=true;
         case SDL_KEYDOWN:
             switch (event.key.keysym.sym)
             {
+            case SDLK_c :
+                n=p.rect.y;
 
+                break;
+            case SDLK_v :
+                n=500;
+
+                break;
             case SDLK_LEFT :
                 I.left=1;
 
@@ -319,7 +343,7 @@ running=true;
 
         if (I.jump==1)
         {
-            saut(&p,500);
+            saut(&p,n);
         }
         if(I.hit==1&&I.left==1)
         {
@@ -333,9 +357,6 @@ running=true;
         {
             p.direction=3;
         }
-
-
-        SDL_Delay(4);//yekber lwakt dt
         dt=SDL_GetTicks() - t0;
 
 
@@ -354,9 +375,9 @@ running=true;
 
         p.vitesse_V+=GRAVITY;//vitesse verticale naks 10 tjrs
         p.rect.y += p.vitesse_V;//yzidha -60
-        if(p.rect.y >= 500)
+        if(p.rect.y >= n)
         {
-            p.rect.y=500;//wsel ground
+            p.rect.y=n;//wsel ground
             p.vitesse_V = 10;//tzidha 10 perso habt khatr wsl
         }
 
@@ -371,7 +392,7 @@ running=true;
         }
         if(ched==0)
         {
-            animerEnnemi(&e);
+            //animerEnnemi(&e);
             afficherEnnemi(e,screen);
 
             deplacer(&e);
@@ -382,25 +403,26 @@ running=true;
             {
                 e.etat=2;
                 ed=1;
+
             }
-            if(e.etat!=2)
                 updateEnnemi ( &e,p.rect );
 
         }
 
-        if (I.hit)
+        if ((I.hit)&&(p.rect.x-e.pos[e.level].x<20))
         {
-                ched=1;
-                e.etat=3;
+            ched=1;
+            e.etat=3;
+
         }
 
 
-        
+
         animation(&p,choix);
         //movePerso(&p,dt);
 
-         afficher_temps(&t,screen);
-       afficher_score(&s,screen,valeur_score);
+        afficher_temps(&t,screen);
+        afficher_score(&s,screen,valeur_score);
         afficher_perso (&p,screen);
         update_score(&valeur_score);
         MAJMinimap(p.rect,&m, b.camera1, 10);
@@ -439,13 +461,13 @@ running=true;
                     M.right = 1;
                     persoo.rect.x+=10;
                     p.rect.x+=10;
-                   if(e.pos[e.level].x-p.rect.x>100)
-                    e.pos[e.level].x-=30;
+                    if(e.pos[e.level].x-p.rect.x>100)
+                        e.pos[e.level].x-=30;
                     break;
                 case SDLK_UP:
                     persoo.rect.y-=5;
 
- 
+
                     break;
                 case SDLK_DOWN:
                     persoo.rect.y+=5;
@@ -458,7 +480,7 @@ running=true;
                     persoo.rect.x-=10;
                     p.rect.x-=10;
                     if(e.pos[e.level].x-p.rect.x>100)
-                    e.pos[e.level].x-=30;
+                        e.pos[e.level].x-=30;
 
                     break;
                 }
@@ -523,7 +545,7 @@ running=true;
     }
 
 
-       
+
 
     load (valeur_score, nom);
     SDL_Quit();
